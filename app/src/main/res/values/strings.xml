@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Mall</string>
+    <string name="app_name">百联优果</string>
+    <string name="home">主页</string>
+    <string name="category">分类</string>
+    <string name="cart">购物车</string>
+    <string name="mine">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommend">今日推荐</string>
+    <string name="preference">限时特惠</string>
+    <string name="market">百联超市</string>
+    <string name="store">附近门店</string>
 </resources>
