@@ -4,8 +4,6 @@
     <string name="category">分类</string>
     <string name="cart">购物车</string>
     <string name="mine">我的</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">你妹的乱码</string>
     <string name="recommend">今日推荐</string>
     <string name="preference">限时特惠</string>
