@@ -13,7 +13,6 @@ import com.mebee.mall.fragment.BaseFragment;
  */
 public class PreferenceFragment extends BaseFragment {
 
-
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return null;
@@ -26,26 +25,6 @@ public class PreferenceFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
-    }
-
-    @Override
-    public void initSliderView() {
-
-    }
-
-    @Override
-    public void initSliderData() {
-
-    }
-
-    @Override
-    public void initRecyclerView() {
-
-    }
-
-    @Override
-    public void initRecyclerData() {
 
     }
 }

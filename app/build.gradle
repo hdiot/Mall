@@ -33,6 +33,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
+    /*广告轮播 AndroidImageSlider*/
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    /*RecyclerView*/
+    //noinspection GradleCompatible
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    /*Fresco*/
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    // 仅支持 WebP 静态图，需要添加
+    compile 'com.facebook.fresco:webpsupport:0.12.0'
 }

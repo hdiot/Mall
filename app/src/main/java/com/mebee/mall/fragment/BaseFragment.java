@@ -33,12 +33,14 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void initData();
 
-    public abstract void initSliderView();
+    public void initSliderView(){}
 
-    public abstract void initSliderData();
+    public void initSliderData(){}
 
-    public abstract void initRecyclerView();
+    public void initRecyclerView(){}
 
-    public abstract void initRecyclerData();
+    public void initRecyclerData(){}
+
+    public void initToolbar(){}
 
 }

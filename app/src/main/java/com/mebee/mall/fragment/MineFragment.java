@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mebee.mall.R;
+
 /**
  * Created by mebee on 2017/8/1.
  */
@@ -12,7 +14,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
+        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        return view;
     }
 
     @Override

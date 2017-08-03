@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
+    android:id="@+id/home_tabhost"
     tools:context="com.mebee.mall.fragment.HomeFragment">
 
     <LinearLayout
@@ -21,7 +22,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="#888" />
 
         <!-- android:layout_height="0dp"必须设置成0 ，否则底部tab选项卡会被遮盖住 -->
         <!-- 这里是tab选项卡的内容 ，宽度要填满，高度自动适应 -->

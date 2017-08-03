@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private View buildIndicator(Tab tab) {
+
         View view = mInflater.inflate(R.layout.main_tab_indicator,null);
         ImageView imageView = (ImageView) view.findViewById(R.id.icon_main_tab);
         TextView textView = (TextView) view.findViewById(R.id.txt_main_indicator);

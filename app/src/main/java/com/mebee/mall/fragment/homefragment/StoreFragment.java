@@ -11,7 +11,7 @@ import com.mebee.mall.fragment.BaseFragment;
 /**
  * Created by mebee on 2017/8/1.
  */
-public class StorekFragment extends BaseFragment {
+public class StoreFragment extends BaseFragment {
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

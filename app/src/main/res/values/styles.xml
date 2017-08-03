@@ -12,6 +12,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="search_view">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#000</item>
