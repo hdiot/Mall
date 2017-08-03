@@ -50,7 +50,6 @@ public class RecommendFragment extends BaseFragment {
     public void initSliderData() {
         super.initSliderData();
 
-
         List<SliderLayoutData> sList = new ArrayList<>();
 
         SliderLayoutData sData1 = new SliderLayoutData("πœ¿‡","http://img.yimutian.com/sells/b5af84c8c75be7a366ab4ea90012305f.jpg");
