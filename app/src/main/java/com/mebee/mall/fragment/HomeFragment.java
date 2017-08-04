@@ -23,6 +23,7 @@ import java.util.List;
 /**
  * Created by mebee on 2017/8/1.
  */
+
 public class HomeFragment extends BaseFragment {
 
 
@@ -69,7 +70,6 @@ public class HomeFragment extends BaseFragment {
                 mTabHost.addTab(tabSpec,tab.getFragment(),null);
             }
         }
-
     }
 
     private View buildIndicator(String title){
