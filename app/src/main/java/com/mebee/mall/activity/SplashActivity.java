@@ -40,6 +40,7 @@ public class SplashActivity extends Activity {
                             public void onAnimationEnd(Animator animation) {
                                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
                                 overridePendingTransition(0,0);
+                                finish();
 
                             }
 

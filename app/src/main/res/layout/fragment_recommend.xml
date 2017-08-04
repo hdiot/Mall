@@ -1,35 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context="com.mebee.mall.fragment.homefragment.RecommendFragment">
 
-    <android.support.v4.widget.NestedScrollView
+
+    <!-- 广告轮播-->
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/recommend_slider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="150dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    </com.daimajia.slider.library.SliderLayout>
 
-            <!-- 广告轮播-->
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/recommend_slider"
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
+    <!-- 商品列表 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recommend_recyler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recommend_slider"></android.support.v7.widget.RecyclerView>
 
-            </com.daimajia.slider.library.SliderLayout>
 
-            <!-- 商品列表 -->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recommend_recyler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-</FrameLayout>
+</LinearLayout>

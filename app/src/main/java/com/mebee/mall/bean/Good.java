@@ -1,9 +1,11 @@
 package com.mebee.mall.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by mebee on 2017/8/3.
  */
-public class Good {
+public class Good implements Serializable{
 
     /**
      * id : 100001

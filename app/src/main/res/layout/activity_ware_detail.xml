@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ware_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mebee.mall.activity.WareDetailActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider_ware_detail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txt_ware_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="30dp"
+                    android:text="-商品名称-"/>
+                <TextView
+                    android:id="@+id/txt_ware_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:text="80 元/斤"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/bt_reduce_ware"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/selector_btn_add_into_cart"/>
+                    <EditText
+                        android:id="@+id/et_volume_ware"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:background="@drawable/edittext_shap"
+                        android:text="0"/>
+
+                    <Button
+                        android:id="@+id/bt_add_ware"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/selector_btn_add_into_cart"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+</ScrollView>
