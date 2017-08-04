@@ -3,7 +3,6 @@ package com.mebee.mall.bean;
 /**
  * Created by mebee on 2017/8/3.
  */
-
 public class SliderLayoutData {
     String url;
     String description;

@@ -14,7 +14,6 @@ public class Good {
      * picture_name_path : http://119.23.33.62:8080/Fruit_Store/GoodsImage/柑橘类image/柠檬-柑橘类.png
      * producing_area : 河南
      */
-
     private String id;
     private String name;
     private String category;

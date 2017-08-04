@@ -42,7 +42,6 @@ public class GoodRecyclerAdapter extends RecyclerView.Adapter<GoodRecyclerAdapte
         holder.goodProductPlace.setText(mGoods.get(position).getProducing_area());
     }
 
-
     @Override
     public int getItemCount() {
         return mGoods.size();

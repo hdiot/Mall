@@ -49,4 +49,5 @@ public class CategoryFragment extends BaseFragment {
     public void initRecyclerData() {
 
     }
+
 }

@@ -69,7 +69,6 @@ public class MyToolbar extends Toolbar {
     }
 
 
-
     private void initView() {
 
         // 判断mView是否为空

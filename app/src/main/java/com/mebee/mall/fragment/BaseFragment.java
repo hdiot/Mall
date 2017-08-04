@@ -42,5 +42,4 @@ public abstract class BaseFragment extends Fragment {
     public void initRecyclerData(){}
 
     public void initToolbar(){}
-
 }

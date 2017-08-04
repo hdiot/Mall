@@ -39,5 +39,4 @@ public class Tab {
         this.title = title;
     }
 
-
 }

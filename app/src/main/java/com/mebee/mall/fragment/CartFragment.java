@@ -50,4 +50,5 @@ public class CartFragment extends BaseFragment {
     public void initRecyclerData() {
 
     }
+
 }

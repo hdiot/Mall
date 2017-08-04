@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         mTabHost = (FragmentTabHost) this.findViewById(R.id.main_tabhost);
         mTabHost.setup(this,getSupportFragmentManager(),R.id.main_tab_cotent);
 
-
         for (Tab mTab : mTabs) {
 
             Log.d("ID", "initTab: "+mTab.getTitle()+"--"+mTab.getIcon());
