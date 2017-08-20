@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Tab category = new Tab(R.string.category,R.drawable.selector_icon_category,CategoryFragment.class);
         Tab mine = new Tab(R.string.mine,R.drawable.selector_icon_mine,MineFragment.class);
 
-        Log.d("ID", "initTab: "+R.mipmap.icon_home+"--"+R.mipmap.icon_cart+"--"+R.mipmap.icon_discover+"--"+R.mipmap.icon_user);
 
         mTabs.add(home);
         mTabs.add(category);

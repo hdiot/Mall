@@ -1,13 +1,84 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.mebee.mall.fragment.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.mebee.mall.widget.MyToolbar
+        android:id="@+id/toolbar_cart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="50dp"
+        android:background="#00b850"
+        app:title="购物车"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/layout_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_cart"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_cart"/>
+
+    <View
+        android:layout_above="@+id/layout_order"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="0.5dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <CheckBox
+            android:id="@+id/cb_choose_all_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00b850"
+            android:layout_margin="5dp"
+            android:text="全选"/>
+
+        <Button
+            android:id="@+id/btn_delete_cart"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@drawable/selector_button_green"
+            android:layout_margin="5dp"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:text="删除"/>
+
+        <TextView
+            android:id="@+id/txt_toal_price_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:gravity="right"
+            android:padding="10dp"
+            android:textColor="#00b850"
+            android:text="XXX元"/>
+
+        <Button
+            android:id="@+id/btn_add_order_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button_green"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="结算"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

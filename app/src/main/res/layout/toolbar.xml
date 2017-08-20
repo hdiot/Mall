@@ -13,6 +13,8 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         style="@style/search_view"
         android:hint="请输入搜索内容"
         android:visibility="gone"

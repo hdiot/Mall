@@ -10,21 +10,22 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mebee.mall.R;
-import com.mebee.mall.bean.Good;
+import com.mebee.mall.bean.Wares;
 
 import java.util.List;
 
 /**
+ *
  * Created by mebee on 2017/8/3.
  */
 
-public class GoodRecyclerAdapter extends RecyclerView.Adapter<GoodRecyclerAdapter.ViewHolder> {
+public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> {
 
-    private static final String TAG = "GoodRecyclerAdapter";
+    private static final String TAG = "WaresAdapter";
 
     private static final String RECYCLERVIEW = "ADAPTER";
     private LayoutInflater mInflater;
-    private List<Good> mGoods;
+    private List<Wares> mWares;
     private View mView;
     ITEMLAYOUTTYPE mLayoutType = ITEMLAYOUTTYPE.HORIZONTAL;
     private OnItemClickListener mListener;
@@ -44,17 +45,16 @@ public class GoodRecyclerAdapter extends RecyclerView.Adapter<GoodRecyclerAdapte
         HORIZONTAL
     }
 
-    public GoodRecyclerAdapter(ITEMLAYOUTTYPE itemlayoutType,List<Good> goods) {
-        Log.d(RECYCLERVIEW, "GoodRecyclerAdapter");
-        this.mGoods = goods;
+    public WaresAdapter(ITEMLAYOUTTYPE itemlayoutType, List<Wares> wares) {
+        Log.d(RECYCLERVIEW, "WaresAdapter");
+        this.mWares = wares;
         this.mLayoutType = itemlayoutType;
     }
 
     @Override
-    public GoodRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WaresAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(RECYCLERVIEW, "onCreateViewHolder:");
         mInflater = LayoutInflater.from(parent.getContext());
-        mView = mInflater.inflate(R.layout.ware_item_view_vertical,parent,false);
 
         if (mLayoutType == ITEMLAYOUTTYPE.VERTICAL) {
             mView = mInflater.inflate(R.layout.ware_item_view_vertical,parent,false);
@@ -67,10 +67,10 @@ public class GoodRecyclerAdapter extends RecyclerView.Adapter<GoodRecyclerAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.goodImage.setImageURI(mGoods.get(position).getPicture_name_path());
-        holder.goodName.setText(mGoods.get(position).getName());
-        holder.goodPrice.setText(String.valueOf(mGoods.get(position).getPrice()));
-        holder.goodProductPlace.setText(mGoods.get(position).getProducing_area());
+        holder.goodImage.setImageURI(mWares.get(position).getPicture_name_path());
+        holder.goodName.setText(mWares.get(position).getName());
+        holder.goodPrice.setText(String.valueOf(mWares.get(position).getPrice()));
+        holder.goodProductPlace.setText(mWares.get(position).getProducing_area());
 
         holder.addIntoCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +92,7 @@ public class GoodRecyclerAdapter extends RecyclerView.Adapter<GoodRecyclerAdapte
 
     @Override
     public int getItemCount() {
-        return mGoods==null ? 0 : mGoods.size();
+        return mWares ==null ? 0 : mWares.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by mebee on 2017/8/3.
  */
-public class Good implements Serializable{
+public class Wares implements Serializable{
 
     /**
      * id : 100001
@@ -17,7 +17,7 @@ public class Good implements Serializable{
      * producing_area : 河南
      */
 
-    private String id;
+    private Long id;
     private String name;
     private String category;
     private double price;
@@ -25,11 +25,11 @@ public class Good implements Serializable{
     private String picture_name_path;
     private String producing_area;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -2,7 +2,6 @@ package com.mebee.mall.fragment.homefragment;
 
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,11 +14,10 @@ import android.view.ViewGroup;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.google.gson.Gson;
 import com.mebee.mall.R;
 import com.mebee.mall.activity.WareDetailActivity;
-import com.mebee.mall.adapter.GoodRecyclerAdapter;
-import com.mebee.mall.bean.Good;
+import com.mebee.mall.adapter.WaresAdapter;
+import com.mebee.mall.bean.Wares;
 import com.mebee.mall.bean.SliderLayoutData;
 import com.mebee.mall.fragment.BaseFragment;
 import com.mebee.mall.http.BaseCallback;
@@ -41,8 +39,7 @@ public class RecommendFragment extends BaseFragment {
     private SliderLayout mSliderLayout;
     private RecyclerView mRecyclerView;
     private OkhttpHelper mOkHttpHelper = OkhttpHelper.getInstance();
-    private Gson mGson = new Gson();
-    private List<Good> mGoods;
+    private List<Wares> mWares;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,21 +101,21 @@ public class RecommendFragment extends BaseFragment {
     public void initRecyclerView() {
         super.initRecyclerView();
 
-        if (mGoods==null) {
+        if (mWares ==null) {
             initRecyclerData();
         }
         setRecyclerLayout();
     }
 
     public void setRecyclerLayout(){
-        GoodRecyclerAdapter goodRecyclerAdapter =
-                new GoodRecyclerAdapter(GoodRecyclerAdapter.ITEMLAYOUTTYPE.VERTICAL,mGoods);
+        WaresAdapter waresAdapter =
+                new WaresAdapter(com.mebee.mall.adapter.WaresAdapter.ITEMLAYOUTTYPE.VERTICAL, mWares);
 
-        goodRecyclerAdapter.setOnItemClickListener(new GoodRecyclerAdapter.OnItemClickListener() {
+        waresAdapter.setOnItemClickListener(new WaresAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(getActivity(), WareDetailActivity.class);
-                intent.putExtra("good", mGoods.get(position));
+                intent.putExtra("good", mWares.get(position));
                 startActivity(intent);
             }
 
@@ -130,7 +127,7 @@ public class RecommendFragment extends BaseFragment {
 
 
 
-        mRecyclerView.setAdapter(goodRecyclerAdapter);
+        mRecyclerView.setAdapter(waresAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -139,7 +136,7 @@ public class RecommendFragment extends BaseFragment {
                 return position==0?3:1;
             }
         });
-        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+        /*mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
 
             @Override
             public void getItemOffsets(Rect outRect, View view,
@@ -147,7 +144,7 @@ public class RecommendFragment extends BaseFragment {
                 super.getItemOffsets(outRect, view, parent, state);
                 outRect.bottom = 20;
             }
-        });
+        });*/
         mRecyclerView.setLayoutManager(layoutManager);
         //mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -159,7 +156,7 @@ public class RecommendFragment extends BaseFragment {
     public void initRecyclerData() {
         super.initRecyclerData();
         String url = "http://119.23.33.62:8080/Fruit_Store/fruit/getAll.action";
-        mOkHttpHelper.doPost(url, "", new BaseCallback<List<Good>>() {
+        mOkHttpHelper.doPost(url, "", new BaseCallback<List<Wares>>() {
 
             @Override
             public void onRequestBefore(Request request) {
@@ -172,12 +169,12 @@ public class RecommendFragment extends BaseFragment {
             }
 
             @Override
-            public void OnSuccess(Response response, List<Good> goods) {
-                Log.d("OkHttpHelper", "OnSuccess: "+goods.size());
-                for (Good good : goods) {
-                    Log.d("OkHttpHelper", "id: "+good.getId()+"--"+"name: "+good.getName());
+            public void OnSuccess(Response response, List<Wares> wares) {
+                Log.d("OkHttpHelper", "OnSuccess: "+ wares.size());
+                for (Wares ware : wares) {
+                    Log.d("OkHttpHelper", "id: "+ ware.getId()+"--"+"name: "+ ware.getName());
                 }
-                mGoods = goods;
+                mWares = wares;
                 setRecyclerLayout();
             }
 

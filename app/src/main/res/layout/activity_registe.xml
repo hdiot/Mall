@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_registe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mebee.mall.activity.RegisteActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_register"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00b850"
+        app:navigationIcon="@drawable/ic_navigate_before_black_24dp"
+        app:title="注册"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/edittext_shap"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:padding="16dp">
+
+        <com.mebee.mall.widget.ClearEditText
+            android:id="@+id/et_id_register"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_account"
+            android:drawablePadding="20dp"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:textColorHint="#00b850"
+            android:hint="请输入用户名"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            android:layout_height="0.5dp"/>
+
+        <com.mebee.mall.widget.ClearEditText
+            android:id="@+id/et_pws_registe"
+            style="@style/editText_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_password"
+            android:drawablePadding="20dp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:textColorHint="#00b850"
+            android:hint="请输入密码"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_signing_registe"
+        android:background="@drawable/selector_button_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="注册"/>
+
+</LinearLayout>

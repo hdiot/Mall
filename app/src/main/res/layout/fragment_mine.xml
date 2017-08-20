@@ -1,13 +1,58 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="com.mebee.mall.fragment.MineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="50dp"
+        android:background="#00b850"
+        app:navigationIcon="@drawable/ic_navigate_before_black_24dp"
+        app:title="果仁"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:background="#00b850"
+                android:gravity="center">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:actualImageScaleType="centerCrop"
+                    app:placeholderImage="@mipmap/head"
+                    app:placeholderImageScaleType="centerCrop"
+                    app:roundAsCircle="true"/>
 
-</FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:text="果仁"/>
+            </LinearLayout>
+
+            <ExpandableListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ExpandableListView>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+</LinearLayout>
