@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mebee.mall.R;
 import com.mebee.mall.activity.WareDetailActivity;
 import com.mebee.mall.adapter.WaresAdapter;
-import com.mebee.mall.bean.Wares;
+import com.mebee.mall.bean.Ware;
 import com.mebee.mall.fragment.BaseFragment;
 import com.mebee.mall.http.BaseCallback;
 import com.mebee.mall.http.OkhttpHelper;
@@ -25,6 +27,7 @@ import com.mebee.mall.utils.Constant;
 import com.mebee.mall.widget.MyToolbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +48,8 @@ public class MarketFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private TabLayout mTabLayout;
     private OkhttpHelper mOkhttpHelper = OkhttpHelper.getInstance();
-    private List<Wares> mWares;
+    private List<Ware> mWares;
+    private WaresAdapter mWaresAdapter;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +65,54 @@ public class MarketFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_market);
 
         initTabLayout();
+        initToolbar();
     }
+
+    @Override
+    public void initToolbar() {
+        super.initToolbar();
+        mToolbar.setSearchViewListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d(TAG, "beforeTextChanged: " + s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG, "onTextChanged: " + s);
+
+                if (mWaresAdapter != null) {
+                    mWaresAdapter.setFilter(filterWares(mWares,s.toString()));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG, "afterTextChanged: " + s);
+                if ( s.toString() == "")
+                    mWaresAdapter.setFilter(mWares);
+
+            }
+        });
+    }
+
+    private List<Ware> filterWares(List<Ware> wares,String query){
+        query = query.toLowerCase();
+
+        final List<Ware> filterWares = new ArrayList<>();
+        for (Ware ware : wares) {
+            final String name = ware.getName();
+            final String place = ware.getProducing_area();
+            final String category = ware.getCategory();
+            if (name.contains(query) || place.contains(query) || category.contains(query)){
+                filterWares.add(ware);
+            }
+        }
+
+        return filterWares;
+    }
+
 
     @Override
     public void initData() {
@@ -150,8 +201,8 @@ public class MarketFragment extends BaseFragment {
     public void initRecyclerView() {
         super.initRecyclerView();
         if (mWares != null) {
-            WaresAdapter adapter = new WaresAdapter(com.mebee.mall.adapter.WaresAdapter.ITEMLAYOUTTYPE.HORIZONTAL,mWares);
-            adapter.setOnItemClickListener(new WaresAdapter.OnItemClickListener() {
+            mWaresAdapter = new WaresAdapter(com.mebee.mall.adapter.WaresAdapter.ITEMLAYOUTTYPE.HORIZONTAL,mWares);
+            mWaresAdapter.setOnItemClickListener(new WaresAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(View v, int position) {
                     Intent intent = new Intent(getActivity(), WareDetailActivity.class);
@@ -159,19 +210,15 @@ public class MarketFragment extends BaseFragment {
                     startActivity(intent);
                 }
 
-                @Override
-                public void onAddClick(View v, int position) {
-
-                }
             });
-            mRecyclerView.setAdapter(adapter);
+            mRecyclerView.setAdapter(mWaresAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             mRecyclerView.setNestedScrollingEnabled(false);
         }
     }
 
     private void getWareDta(){
-       mOkhttpHelper.doPost(Constant.API.ALL_WARES, "", new BaseCallback<List<Wares>>() {
+       mOkhttpHelper.doPost(Constant.API.ALL_WARES, "", new BaseCallback<List<Ware>>() {
            @Override
            public void onRequestBefore(Request request) {
 
@@ -183,7 +230,7 @@ public class MarketFragment extends BaseFragment {
            }
 
            @Override
-           public void OnSuccess(Response response, List<Wares> wares) {
+           public void OnSuccess(Response response, List<Ware> wares) {
                mWares = wares;
                initSliderView();
                initRecyclerView();

@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*Set<RequestListener> requestListeners = new HashSet<>();
+        requestListeners.add(new RequestLoggingListener());
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                // other setters
+                .setRequestListeners(requestListeners)
+                .build();
+        Fresco.initialize(this, config);
+        FLog.setMinimumLoggingLevel(FLog.VERBOSE);*/
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
         initTab();

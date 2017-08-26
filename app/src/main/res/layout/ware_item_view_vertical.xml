@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/good_bg"/>
+        android:background="@mipmap/pic_load_fail"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/txt_good_name"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-
+                android:visibility="gone"
                 android:maxLines="1"
                 android:text="湛江"/>
 
@@ -59,7 +59,7 @@
         <Button
             android:id="@+id/btn_add_into_cart"
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:background="@drawable/selector_btn_add_into_cart"/>

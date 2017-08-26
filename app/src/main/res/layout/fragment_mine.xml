@@ -8,25 +8,25 @@
     tools:context="com.mebee.mall.fragment.MineFragment">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_mine"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00b850"
         app:navigationIcon="@drawable/ic_navigate_before_black_24dp"
         app:title="果仁"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:orientation="vertical"
                 android:background="#00b850"
                 android:gravity="center">
                 <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdv_head_mine"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:actualImageScaleType="centerCrop"
@@ -35,24 +35,23 @@
                     app:roundAsCircle="true"/>
 
                 <TextView
+                    android:id="@+id/txt_name_mine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:textColor="#000"
                     android:textSize="18sp"
-                    android:text="果仁"/>
+                    android:text="点击头像登录"/>
             </LinearLayout>
 
             <ExpandableListView
+                android:id="@+id/ex_listview_mine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
             </ExpandableListView>
 
         </LinearLayout>
-
-
-
-    </ScrollView>
 </LinearLayout>

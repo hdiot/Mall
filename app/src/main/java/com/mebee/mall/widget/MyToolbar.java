@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.Toolbar;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -82,6 +83,7 @@ public class MyToolbar extends Toolbar {
             mSearchView = (EditText) mView.findViewById(R.id.toolbar_searchview);
             mRightImageButton = (Button) mView.findViewById(R.id.toolbar_rightButton);
 
+
             if (mTextTitle==null){
                 Log.d("view", "initView: ");
             }
@@ -93,6 +95,9 @@ public class MyToolbar extends Toolbar {
         }
     }
 
+    public void setSearchViewListener(TextWatcher textWatcher){
+        mSearchView.addTextChangedListener(textWatcher);
+    }
 
     public void setRightButton(Drawable icon) {
         if (mRightImageButton != null) {

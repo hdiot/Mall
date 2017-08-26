@@ -5,9 +5,9 @@ package com.mebee.mall.bean;
  */
 
 public class Tab {
-    private int title;      // æ ‡é¢˜id
-    private int icon;       // å›¾ç‰‡id
-    private Class fragment; // å¯¹åº”çš„Fragmentç±»
+    private int title;      // ±êÌâid
+    private int icon;       // Í¼Æ¬id
+    private Class fragment; // ¶ÔÓ¦µÄFragmentÀà
 
     public Tab( int title, int icon, Class fragment) {
         this.fragment = fragment;

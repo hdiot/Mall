@@ -1,7 +1,6 @@
 package com.mebee.mall.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,8 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mebee.mall.R;
-import com.mebee.mall.bean.Wares;
+import com.mebee.mall.bean.Ware;
+import com.mebee.mall.utils.CartProvider;
 
 import java.util.List;
 
@@ -23,45 +23,46 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
 
     private static final String TAG = "WaresAdapter";
 
-    private static final String RECYCLERVIEW = "ADAPTER";
+    private ITEMLAYOUTTYPE mLayoutType = ITEMLAYOUTTYPE.HORIZONTAL;
     private LayoutInflater mInflater;
-    private List<Wares> mWares;
+    private List<Ware> mWares;
     private View mView;
-    ITEMLAYOUTTYPE mLayoutType = ITEMLAYOUTTYPE.HORIZONTAL;
     private OnItemClickListener mListener;
+    private CartProvider mProvider;
 
     public interface OnItemClickListener {
         void onClick(View v, int position);
-        void onAddClick(View v, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-
     public enum ITEMLAYOUTTYPE{
         VERTICAL,
         HORIZONTAL
     }
 
-    public WaresAdapter(ITEMLAYOUTTYPE itemlayoutType, List<Wares> wares) {
-        Log.d(RECYCLERVIEW, "WaresAdapter");
+    public void setFilter(List<Ware> wares) {
+        mWares = wares;
+        notifyDataSetChanged();
+    }
+
+    public WaresAdapter(ITEMLAYOUTTYPE itemlayoutType, List<Ware> wares) {
         this.mWares = wares;
         this.mLayoutType = itemlayoutType;
     }
 
     @Override
     public WaresAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d(RECYCLERVIEW, "onCreateViewHolder:");
-        mInflater = LayoutInflater.from(parent.getContext());
 
+        mInflater = LayoutInflater.from(parent.getContext());
+        mProvider = CartProvider.getInstance(parent.getContext());
         if (mLayoutType == ITEMLAYOUTTYPE.VERTICAL) {
             mView = mInflater.inflate(R.layout.ware_item_view_vertical,parent,false);
         }else {
             mView = mInflater.inflate(R.layout.ware_item_view_horizon,parent,false);
         }
-
         return new ViewHolder(mView);
     }
 
@@ -69,14 +70,12 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.goodImage.setImageURI(mWares.get(position).getPicture_name_path());
         holder.goodName.setText(mWares.get(position).getName());
-        holder.goodPrice.setText(String.valueOf(mWares.get(position).getPrice()));
+        holder.goodPrice.setText(String.valueOf(mWares.get(position).getPrice())+"ิช/ฝ๏");
         holder.goodProductPlace.setText(mWares.get(position).getProducing_area());
-
         holder.addIntoCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onAddClick(v,position);
-                Log.d(TAG, "onClick: add ");
+                mProvider.put(mWares.get(position));
             }
         });
 
@@ -84,7 +83,6 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 mListener.onClick(v,position);
-                Log.d(TAG, "onClick: item ");
             }
         });
     }
@@ -96,7 +94,6 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private static final String TAG = "ViewHolder";
         SimpleDraweeView goodImage;
         TextView goodName;
         TextView goodPrice;
@@ -106,7 +103,6 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "ViewHolder: ");
             goodImage = (SimpleDraweeView) itemView.findViewById(R.id.img_good_pre);
             goodName = (TextView) itemView.findViewById(R.id.txt_good_name);
             goodPrice = (TextView) itemView.findViewById(R.id.txt_good_price);

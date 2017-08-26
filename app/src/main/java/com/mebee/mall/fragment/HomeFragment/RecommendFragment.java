@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -17,7 +18,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mebee.mall.R;
 import com.mebee.mall.activity.WareDetailActivity;
 import com.mebee.mall.adapter.WaresAdapter;
-import com.mebee.mall.bean.Wares;
+import com.mebee.mall.bean.Ware;
 import com.mebee.mall.bean.SliderLayoutData;
 import com.mebee.mall.fragment.BaseFragment;
 import com.mebee.mall.http.BaseCallback;
@@ -39,7 +40,7 @@ public class RecommendFragment extends BaseFragment {
     private SliderLayout mSliderLayout;
     private RecyclerView mRecyclerView;
     private OkhttpHelper mOkHttpHelper = OkhttpHelper.getInstance();
-    private List<Wares> mWares;
+    private List<Ware> mWares;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class RecommendFragment extends BaseFragment {
 
         List<SliderLayoutData> sList = new ArrayList<>();
 
-        SliderLayoutData sData1 = new SliderLayoutData("瓜类","http://119.23.33.62:8080/Fruit_Store/GoodsImage/瓜类image/木瓜-瓜类.png");
+        SliderLayoutData sData1 = new SliderLayoutData("瓜类","http://119.23.33.62:8080/Fruit_Store/upload/mebee/8639B4A841C817B897F231984A5C2A9E.jpg");
         SliderLayoutData sData2 = new SliderLayoutData("橘类","http://119.23.33.62:8080/Fruit_Store/GoodsImage/柑橘类image/橙子-柑橘类.png");
         SliderLayoutData sData3 = new SliderLayoutData("仁果","http://119.23.33.62:8080/Fruit_Store/GoodsImage/仁果类image/枇杷-仁果类.png");
         SliderLayoutData sData4 = new SliderLayoutData("其他","http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/生菜-其它.png");
@@ -119,10 +120,6 @@ public class RecommendFragment extends BaseFragment {
                 startActivity(intent);
             }
 
-            @Override
-            public void onAddClick(View v, int position) {
-
-            }
         });
 
 
@@ -156,7 +153,7 @@ public class RecommendFragment extends BaseFragment {
     public void initRecyclerData() {
         super.initRecyclerData();
         String url = "http://119.23.33.62:8080/Fruit_Store/fruit/getAll.action";
-        mOkHttpHelper.doPost(url, "", new BaseCallback<List<Wares>>() {
+        mOkHttpHelper.doPost(url, "", new BaseCallback<List<Ware>>() {
 
             @Override
             public void onRequestBefore(Request request) {
@@ -165,13 +162,13 @@ public class RecommendFragment extends BaseFragment {
 
             @Override
             public void onFailure(Request request, IOException e) {
-
+                Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void OnSuccess(Response response, List<Wares> wares) {
+            public void OnSuccess(Response response, List<Ware> wares) {
                 Log.d("OkHttpHelper", "OnSuccess: "+ wares.size());
-                for (Wares ware : wares) {
+                for (Ware ware : wares) {
                     Log.d("OkHttpHelper", "id: "+ ware.getId()+"--"+"name: "+ ware.getName());
                 }
                 mWares = wares;
@@ -180,7 +177,7 @@ public class RecommendFragment extends BaseFragment {
 
             @Override
             public void onError(Response response, int code, Exception e) {
-
+                Toast.makeText(getActivity(), "网络出错" + code, Toast.LENGTH_SHORT).show();
             }
         });
 

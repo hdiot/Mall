@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by mebee on 2017/8/3.
  */
-public class Wares implements Serializable{
+public class Ware implements Serializable{
 
     /**
      * id : 100001

@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:clickable="true"
     tools:context="com.mebee.mall.activity.WareDetailActivity">
 
 
@@ -29,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary" >
+            android:orientation="vertical">
 
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider_ware_detail"

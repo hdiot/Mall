@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mebee.mall.R;
-import com.mebee.mall.bean.LoginRegisteRespMsg;
+import com.mebee.mall.bean.ResponseMessage;
 import com.mebee.mall.http.BaseCallback;
 import com.mebee.mall.http.OkhttpHelper;
 import com.mebee.mall.utils.Constant;
@@ -47,6 +48,16 @@ public class RegisteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registe);
         ButterKnife.bind(this);
+        initToolbar();
+    }
+
+    private void initToolbar(){
+        toolbarRegister.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @OnClick(R.id.btn_signing_registe)
@@ -71,7 +82,7 @@ public class RegisteActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        mOkhttpHelper.doPost(Constant.API.REGISTE_API, json.toString(), new BaseCallback<LoginRegisteRespMsg<String>>() {
+        mOkhttpHelper.doPost(Constant.API.REGISTE_API, json.toString(), new BaseCallback<ResponseMessage<String>>() {
             @Override
             public void onRequestBefore(Request request) {
 
@@ -79,11 +90,11 @@ public class RegisteActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Request request, IOException e) {
-
+                Toast.makeText(RegisteActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void OnSuccess(Response response, LoginRegisteRespMsg<String> msg) {
+            public void OnSuccess(Response response, ResponseMessage<String> msg) {
                 Log.d(TAG, "OnSuccess: " + msg.getResult());
                 if (msg.getResult().equals("UserExist")) {
                     Toast.makeText(RegisteActivity.this, "该用户已存在", Toast.LENGTH_SHORT).show();
@@ -100,7 +111,7 @@ public class RegisteActivity extends AppCompatActivity {
 
             @Override
             public void onError(Response response, int code, Exception e) {
-
+                Toast.makeText(RegisteActivity.this, "网络出错" + code, Toast.LENGTH_SHORT).show();
             }
         });
 

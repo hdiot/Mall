@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by mebee on 2017/8/18.
  */
 
-public class ShoppingCart extends Wares implements Serializable {
+public class ShoppingCart extends Ware implements Serializable {
 
     private int count;
     private boolean isCheck = true;
@@ -19,7 +19,7 @@ public class ShoppingCart extends Wares implements Serializable {
         this.count = count;
     }
 
-    public boolean isCheck() {
+    public boolean isChecked() {
         return isCheck;
     }
 

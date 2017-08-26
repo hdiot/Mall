@@ -4,7 +4,7 @@ package com.mebee.mall.bean;
  * Created by mebee on 2017/8/19.
  */
 
-public class LoginRegisteRespMsg<T>{
+public class ResponseMessage<T>{
 
     /**
      * Result : NotExistError

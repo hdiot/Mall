@@ -17,8 +17,9 @@ public class PreferencesUtils {
     }
 
     public static String getString(Context context, String key) {
-        return null;
+        return getString(context, key, null);
     }
+
 
     public static String getString(Context context, String key, String defaultValue) {
         SharedPreferences settings = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/selector_item_bg"
+    android:gravity="center_vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:clickable="true">
+
+    <CheckBox
+        android:id="@+id/cb_select_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_picture_cart"
+        android:layout_margin="5dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_name_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="葡萄"/>
+
+        <TextView
+            android:id="@+id/txt_price_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="12元/斤"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:orientation="horizontal">
+           <EditText
+               android:id="@+id/et_volume_cart"
+               android:background="@drawable/edittext_shap"
+               android:layout_width="60dp"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:inputType="number"
+               android:maxLength="5"
+               android:enabled="true"
+               android:focusableInTouchMode="true"
+               android:padding="2dp"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="斤"/>
+
+       </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_price_tatal_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="xxx元"/>
+
+    </LinearLayout>
+
+</LinearLayout>

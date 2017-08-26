@@ -1,12 +1,14 @@
 package com.mebee.mall.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.gson.reflect.TypeToken;
-import com.mebee.mall.bean.Wares;
 import com.mebee.mall.bean.ShoppingCart;
+import com.mebee.mall.bean.Ware;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class CartProvider {
 
     public static final  String  CART_JSON = "cart_json";
+    private static final String TAG = "CartProvider";
 
     private SparseArray<ShoppingCart> mDatas = null;
     private Context mContext;
@@ -35,7 +38,7 @@ public class CartProvider {
         return sInstance;
     }
 
-    private CartProvider(Context context) {
+    CartProvider(Context context) {
         mDatas = new SparseArray<>();
         mContext = context;
         list2Sparse();
@@ -60,7 +63,9 @@ public class CartProvider {
     }
 
     private List<ShoppingCart> getDataFromLocal() {
+
         String json = PreferencesUtils.getString(mContext,CART_JSON);
+        Log.d(TAG, "getDataFromLocal: " + json);
         List<ShoppingCart> carts = null;
         if (json != null) {
             carts = JSONUtil.fromJson(json, new TypeToken<List<ShoppingCart>>(){}.getType());
@@ -71,12 +76,12 @@ public class CartProvider {
         return carts;
     }
 
-    private ShoppingCart convertData(Wares wares) {
+    private ShoppingCart convertData(Ware ware) {
         ShoppingCart cart = new ShoppingCart();
-        cart.setId(wares.getId());
-        cart.setName(wares.getName());
-        cart.setPicture_name_path(wares.getPicture_name_path());
-        cart.setPrice(wares.getPrice());
+        cart.setId(ware.getId());
+        cart.setName(ware.getName());
+        cart.setPicture_name_path(ware.getPicture_name_path());
+        cart.setPrice(ware.getPrice());
         return cart;
     }
 
@@ -91,8 +96,8 @@ public class CartProvider {
         update(t);
     }
 
-    public void put(Wares wares) {
-        ShoppingCart cart = convertData(wares);
+    public void put(Ware ware) {
+        ShoppingCart cart = convertData(ware);
         put(cart);
     }
 
@@ -121,6 +126,20 @@ public class CartProvider {
     }
 
 
+    public double getTotalPrice(){
 
+        double totalPrice = 0.00;
+        if (mDatas != null) {
+            for (int i= 0; i < mDatas.size(); i++){
+                ShoppingCart carts =  mDatas.valueAt(i);
+                if (carts.isChecked()) {
+                    totalPrice += carts.getPrice() * carts.getCount();
+                    BigDecimal decimal = new BigDecimal(totalPrice);
+                    totalPrice = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                }
+            }
+        }
+        return totalPrice;
+    }
 
 }

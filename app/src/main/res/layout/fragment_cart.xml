@@ -1,31 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.mebee.mall.fragment.CartFragment">
 
     <com.mebee.mall.widget.MyToolbar
-        android:id="@+id/toolbar_cart"
+        android:id="@+id/toolbar_order"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00b850"
         app:title="购物车"/>
 
+
     <LinearLayout
         android:id="@+id/layout_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_cart"
+        android:layout_below="@+id/toolbar_order"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:clickable="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ly_address_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:focusable="false"
+                android:clickable="false"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_name_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="18sp"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:text="mebee"/>
+
+                <TextView
+                    android:id="@+id/txt_tel_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:textSize="16sp"
+                    android:text="13400000000"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_address_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:drawableLeft="@mipmap/icon_address"
+                android:focusable="false"
+                android:clickable="false"
+                android:drawablePadding="10dp"
+                android:text="广东省湛江市广东海洋大学"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="20dp"
+            android:focusable="false"
+            android:clickable="false"
+            android:background="@mipmap/icon_triangle_right" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_cart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_cart"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/border_color"
+        android:layout_below="@+id/toolbar_order"/>
 
     <View
         android:layout_above="@+id/layout_order"
@@ -38,6 +110,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
@@ -60,7 +134,7 @@
             android:text="删除"/>
 
         <TextView
-            android:id="@+id/txt_toal_price_cart"
+            android:id="@+id/txt_total_price_cart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -74,11 +148,10 @@
             android:id="@+id/btn_add_order_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_button_green"
+            android:background="@drawable/selector_button_square"
             android:textColor="@color/white"
-            android:layout_margin="5dp"
             android:text="结算"/>
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
