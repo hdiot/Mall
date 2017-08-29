@@ -82,7 +82,7 @@ public class MarketFragment extends BaseFragment {
                 Log.d(TAG, "onTextChanged: " + s);
 
                 if (mWaresAdapter != null) {
-                    mWaresAdapter.setFilter(filterWares(mWares,s.toString()));
+                    mWaresAdapter.refreshData(filterWares(mWares,s.toString()));
                 }
 
             }
@@ -91,7 +91,7 @@ public class MarketFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
                 Log.d(TAG, "afterTextChanged: " + s);
                 if ( s.toString() == "")
-                    mWaresAdapter.setFilter(mWares);
+                    mWaresAdapter.refreshData(mWares);
 
             }
         });
@@ -156,9 +156,9 @@ public class MarketFragment extends BaseFragment {
     private void initTabLayout() {
 
         Map<String, String> tabsInfo = new HashMap<>();
-        tabsInfo.put("TAG_COMPRE", "综合");
-        tabsInfo.put("TAG_VOLUME", "销量");
-        tabsInfo.put("TAG_PRICE", "价格");
+        tabsInfo.put(getString(R.string.tab_synthetical), getString(R.string.synthetical));
+        tabsInfo.put(getString(R.string.tab_salesvolume), getString(R.string.salesvolume));
+        tabsInfo.put(getString(R.string.tag_price), getString(R.string.price));
 
         for (Map.Entry<String, String> Entry : tabsInfo.entrySet()) {
             TabLayout.Tab tab = mTabLayout.newTab();

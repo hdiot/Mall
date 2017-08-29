@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mebee.mall.R;
-import com.mebee.mall.bean.ResponseMessage;
+import com.mebee.mall.bean.ResMessage;
 import com.mebee.mall.http.BaseCallback;
 import com.mebee.mall.http.OkhttpHelper;
 import com.mebee.mall.utils.Constant;
@@ -20,24 +19,20 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * 逻辑跟 LoginActivity 一样
+ */
 public class RegisteActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar_register)
-    Toolbar toolbarRegister;
-    @BindView(R.id.et_id_register)
-    ClearEditText etIdRegister;
-    @BindView(R.id.et_pws_registe)
-    ClearEditText etPwsRegiste;
-    @BindView(R.id.btn_signing_registe)
-    Button btnSigningRegiste;
+    private Toolbar toolbarRegister;
+    private ClearEditText etIdRegister;
+    private ClearEditText etPwsRegiste;
+    private Button btnSigningRegiste;
 
-    private OkhttpHelper mOkhttpHelper = OkhttpHelper.getInstance();
+    private OkhttpHelper mOkhttpHelper;
     private String mId;
     private String mPwd;
 
@@ -47,22 +42,21 @@ public class RegisteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registe);
-        ButterKnife.bind(this);
-        initToolbar();
+        mOkhttpHelper = OkhttpHelper.getInstance();
+        initUI();
+        setListener();
     }
 
-    private void initToolbar(){
-        toolbarRegister.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    private void setListener() {
+        toolbarRegister.setNavigationOnClickListener(v -> finish());
+        btnSigningRegiste.setOnClickListener(v -> registe());
     }
 
-    @OnClick(R.id.btn_signing_registe)
-    public void onViewClicked() {
-        registe();
+    private void initUI(){
+        toolbarRegister = (Toolbar) findViewById(R.id.toolbar_register);
+        etIdRegister = (ClearEditText) findViewById(R.id.et_id_register);
+        etPwsRegiste = (ClearEditText) findViewById(R.id.et_pws_registe);
+        btnSigningRegiste = (Button) findViewById(R.id.btn_signing_registe);
     }
 
     private void registe(){
@@ -70,19 +64,19 @@ public class RegisteActivity extends AppCompatActivity {
         mPwd = etPwsRegiste.getText().toString();
 
         if (mId.isEmpty() || mPwd.isEmpty()) {
-            Toast.makeText(this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_to_input_name_pwd, Toast.LENGTH_SHORT).show();
             return;
         }
 
         JSONObject json = new JSONObject();
         try {
-            json.put("user_name", mId);
-            json.put("password", mPwd);
+            json.put(getString(R.string.registe_key_name), mId);
+            json.put(getString(R.string.registe_key_password), mPwd);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        mOkhttpHelper.doPost(Constant.API.REGISTE_API, json.toString(), new BaseCallback<ResponseMessage<String>>() {
+        mOkhttpHelper.doPost(Constant.API.REGISTE_API, json.toString(), new BaseCallback<ResMessage<String>>() {
             @Override
             public void onRequestBefore(Request request) {
 
@@ -90,28 +84,25 @@ public class RegisteActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(RegisteActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisteActivity.this, R.string.netword_fail, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void OnSuccess(Response response, ResponseMessage<String> msg) {
+            public void OnSuccess(Response response, ResMessage<String> msg) {
                 Log.d(TAG, "OnSuccess: " + msg.getResult());
                 if (msg.getResult().equals("UserExist")) {
-                    Toast.makeText(RegisteActivity.this, "该用户已存在", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisteActivity.this, R.string.user_existed, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (msg.getResult().equals("RegisterSuccess")) {
-                    Toast.makeText(RegisteActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(RegisteActivity.this, R.string.registe_success, Toast.LENGTH_SHORT).show();
                 }
-
             }
-
 
             @Override
             public void onError(Response response, int code, Exception e) {
-                Toast.makeText(RegisteActivity.this, "网络出错" + code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisteActivity.this, R.string.netword_fail + code, Toast.LENGTH_SHORT).show();
             }
         });
 

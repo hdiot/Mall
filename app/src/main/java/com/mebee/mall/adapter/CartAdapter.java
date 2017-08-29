@@ -104,6 +104,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
                 holder.totalPrice.setText(getTotalPrice(cart)+"ิช/ฝ๏");
             }
         });
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private double getTotalPrice(ShoppingCart cart) {
@@ -129,6 +136,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
         TextView price;
         EditText volume;
         TextView totalPrice;
+        View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -138,6 +146,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
             price = (TextView) itemView.findViewById(R.id.txt_price_cart);
             volume = (EditText) itemView.findViewById(R.id.et_volume_cart);
             totalPrice = (TextView) itemView.findViewById(R.id.txt_price_tatal_cart);
+            view = itemView;
         }
     }
 

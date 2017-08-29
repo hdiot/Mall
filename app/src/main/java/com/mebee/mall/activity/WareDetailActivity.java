@@ -13,13 +13,11 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mebee.mall.R;
 import com.mebee.mall.bean.Ware;
-import com.mebee.mall.http.OkhttpHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WareDetailActivity extends Activity {
-
 
     @BindView(R.id.toolbar_ware_detail)
     Toolbar toolbarWareDetail;
@@ -36,24 +34,35 @@ public class WareDetailActivity extends Activity {
     @BindView(R.id.bt_add_ware)
     Button btAddWare;
     private Ware mWare;
-    private OkhttpHelper mOkhttpHelper;
-    private Toolbar toolbar;
-    private EditText etVolume;
+
+    /*private OkhttpHelper mOkhttpHelper;
+    private Toolbar toolbarWareDetail;
+    private SliderLayout sliderWareDetail;
+    private TextView txtWareName;
+    private TextView txtWarePrice;
+    private EditText etVolumeWare;
+    private Button btReduceWare;
+    private Button btAddWare;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ware_detail);
         ButterKnife.bind(this);
-
         mWare = (Ware) getIntent().getSerializableExtra("good");
         initView();
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_ware_detail);
-        etVolume = (EditText) findViewById(R.id.et_volume_ware);
+        toolbarWareDetail = (Toolbar) findViewById(R.id.toolbar_ware_detail);
+        etVolumeWare = (EditText) findViewById(R.id.et_volume_ware);
         sliderWareDetail = (SliderLayout) findViewById(R.id.slider_ware_detail);
+        txtWareName = (TextView) findViewById(R.id.txt_ware_name);
+        btReduceWare = (Button) findViewById(R.id.bt_reduce_ware);
+        btAddWare = (Button) findViewById(R.id.bt_add_ware);
+        txtWarePrice = (TextView) findViewById(R.id.txt_ware_price);
+
+
         initToolbar();
         initSlider();
         initWareInfo();
@@ -65,7 +74,7 @@ public class WareDetailActivity extends Activity {
     }
 
     private void initToolbar() {
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbarWareDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

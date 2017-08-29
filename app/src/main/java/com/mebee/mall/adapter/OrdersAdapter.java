@@ -1,8 +1,10 @@
 package com.mebee.mall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,12 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.mebee.mall.R;
-import com.mebee.mall.bean.ResponseOrderInfo;
+import com.mebee.mall.activity.OrderDetailActivity;
+import com.mebee.mall.bean.ResOrderInfo;
 
 import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by mebee on 2017/8/26.
@@ -21,12 +26,12 @@ import java.util.List;
 public class OrdersAdapter extends BaseExpandableListAdapter {
 
     private static final String TAG = "OrdersAdapter";
-    private List<List<ResponseOrderInfo>> mDatas;
+    private List<List<ResOrderInfo>> mDatas;
 
-    private final String [] mStates = {"È«²¿¶©µ¥", "´ı¸¶¿î" , "´ú·¢»õ" , "´ıÊÕ»õ", "´ıÆÀÂÛ"};
+    private final String [] mStates = {"å…¨éƒ¨è®¢å•", "å¾…ä»˜æ¬¾" , "ä»£å‘è´§" , "å¾…æ”¶è´§", "å¾…è¯„è®º"};
     private Context mContext;
 
-    public OrdersAdapter(List<List<ResponseOrderInfo>> mDatas, Context context) {
+    public OrdersAdapter(List<List<ResOrderInfo>> mDatas, Context context) {
         this.mDatas = mDatas;
         this.mContext = context;
     }
@@ -43,12 +48,13 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
+
         return mStates[groupPosition];
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return mDatas.get(groupPosition).get(childPosition);
+        return mDatas == null ? null : mDatas.get(groupPosition).get(childPosition);
     }
 
     @Override
@@ -89,6 +95,7 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item_view,parent,false);
             childViewHolder = new ChildViewHolder();
+            childViewHolder.view = convertView;
             childViewHolder.rvImg = (RecyclerView) convertView.findViewById(R.id.rv_order_imgs_orderitem);
             childViewHolder.tvId = (TextView) convertView.findViewById(R.id.txt_order_id);
             childViewHolder.tvState = (TextView) convertView.findViewById(R.id.txt_order_state);
@@ -97,21 +104,29 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
-        ResponseOrderInfo info = (ResponseOrderInfo) getChild(groupPosition,childPosition);
+        ResOrderInfo info = (ResOrderInfo) getChild(groupPosition,childPosition);
         switch (info.getOrder_state()) {
             case 0:
-                childViewHolder.tvState.setText("´ı¸¶¿î");
+                childViewHolder.tvState.setText("å¾…ä»˜æ¬¾");
                 break;
             case 1:
-                childViewHolder.tvState.setText("´ú·¢»õ");
+                childViewHolder.tvState.setText("ä»£å‘è´§");
                 break;
             case 2:
-                childViewHolder.tvState.setText("´ıÊÕ»õ");
+                childViewHolder.tvState.setText("å¾…æ”¶è´§");
                 break;
             case 3:
-                childViewHolder.tvState.setText("´ıÆÀÂÛ");
+                childViewHolder.tvState.setText("å¾…è¯„è®º");
                 break;
         }
+        childViewHolder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                startActivity(mContext,intent,null);
+                Log.d(TAG, "onClick: ");
+            }
+        });
         childViewHolder.tvId.setText(info.getId());
         childViewHolder.rvImg.setAdapter(new OrderItemImgAdapter());
         childViewHolder.rvImg.setLayoutManager(new GridLayoutManager(mContext,3));
@@ -133,5 +148,6 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
         TextView tvState;
         TextView tvId;
         TextView tvSummatio;
+        View view;
     }
 }

@@ -4,7 +4,7 @@ package com.mebee.mall.bean;
  * Created by mebee on 2017/8/24.
  */
 
-public class ResponseOrderInfo {
+public class ResOrderInfo {
 
     /**
      * id : 3

@@ -33,14 +33,14 @@ public class OkhttpHelper {
     private Gson mGson;
     private Handler mHandler;
 
-    private static String mSessionid = new String();
+    public String mSessionid = new String();
 
-    public static String getmSessionid() {
+    public String getmSessionid() {
         return mSessionid;
     }
 
-    public static void setmSessionid(String mSessionid) {
-        OkhttpHelper.mSessionid = mSessionid;
+    public void setmSessionid(String mSessionid) {
+        this.mSessionid = mSessionid;
     }
 
     private OkhttpHelper() {

@@ -16,8 +16,7 @@
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.5">
-        </TabWidget>
+            android:background="@color/colorPrimaryDark" />
 
         <View
             android:layout_width="match_parent"

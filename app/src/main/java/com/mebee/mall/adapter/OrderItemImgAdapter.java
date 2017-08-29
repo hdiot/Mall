@@ -29,7 +29,7 @@ public class OrderItemImgAdapter extends RecyclerView.Adapter<OrderItemImgAdapte
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 18;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

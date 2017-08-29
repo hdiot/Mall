@@ -72,9 +72,9 @@
 
                     <Button
                         android:id="@+id/bt_reduce_ware"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/selector_btn_add_into_cart" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/selector_btn_add_into_cart" />
 
                     <EditText
                         android:id="@+id/et_volume_ware"

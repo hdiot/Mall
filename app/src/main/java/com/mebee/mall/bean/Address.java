@@ -1,10 +1,12 @@
 package com.mebee.mall.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by mebee on 2017/8/23.
  */
 
-public class Address {
+public class Address implements Serializable {
     private String name;
     private String tel;
     private String address;

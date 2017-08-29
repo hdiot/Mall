@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         initTab();
     }
 
+    /**
+     * 初始化FragmentTabHost
+     */
     private void initTab() {
 
         Tab home = new Tab(R.string.home,R.drawable.selector_icon_home,HomeFragment.class);
@@ -57,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
         mTabs.add(cart);
         mTabs.add(mine);
 
+        // 实例化 FragmentTabHost
         mInflater = LayoutInflater.from(this);
         mTabHost = (FragmentTabHost) this.findViewById(R.id.main_tabhost);
         mTabHost.setup(this,getSupportFragmentManager(),R.id.main_tab_cotent);
 
-
+        // 根据 Tab 信息 创建  Tab Fragment
         for (Tab mTab : mTabs) {
 
             Log.d("ID", "initTab: "+mTab.getTitle()+"--"+mTab.getIcon());
@@ -72,20 +76,20 @@ public class MainActivity extends AppCompatActivity {
 
             mTabHost.addTab(tabspec,mTab.getFragment(),null);
         }
-
         mTabHost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
-
     }
 
+    /**
+     * 为 Tab 创建指示器
+     * @param tab
+     * @return
+     */
     private View buildIndicator(Tab tab) {
-
         View view = mInflater.inflate(R.layout.main_tab_indicator,null);
         ImageView imageView = (ImageView) view.findViewById(R.id.icon_main_tab);
         TextView textView = (TextView) view.findViewById(R.id.txt_main_indicator);
-
         imageView.setBackgroundResource(tab.getIcon());
         textView.setText(tab.getTitle());
-
         return view;
 
     }

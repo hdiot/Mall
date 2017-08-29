@@ -82,16 +82,16 @@ public class CategoryFragment extends BaseFragment {
     private void initTabLayout(){
         TabLayout.Tab tab;
         tab = mTabLayout.newTab();
-        tab.setText("综合");
-        tab.setTag("TAG_COMPRE");
+        tab.setText(R.string.synthetical);
+        tab.setTag(getString(R.string.tab_synthetical));
         mTabLayout.addTab(tab);
         tab = mTabLayout.newTab();
-        tab.setText("销量");
-        tab.setTag("TAG_VOLUNE");
+        tab.setText(R.string.salesvolume);
+        tab.setTag(getString(R.string.tab_salesvolume));
         mTabLayout.addTab(tab);
         tab = mTabLayout.newTab();
-        tab.setText("价格");
-        tab.setTag("TAG_PRICE");
+        tab.setText(R.string.price);
+        tab.setTag(getString(R.string.tag_price));
         mTabLayout.addTab(tab);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -135,7 +135,12 @@ public class CategoryFragment extends BaseFragment {
 
     private void initCategoryRecView(){
         mCategoryAdapter = new CategoryAdapter();
-        mCategoryAdapter.setItemOnClickListener((view, position) -> getCategoryWares(position));
+        mCategoryAdapter.setItemOnClickListener(new CategoryAdapter.CategoryItemOnClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                getCategoryWares(position);
+            }
+        });
 
         mCategoryRV.setAdapter(mCategoryAdapter);
         mCategoryRV.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -157,14 +162,13 @@ public class CategoryFragment extends BaseFragment {
 
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.netword_fail, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnSuccess(Response response, String s) {
                 Log.d(TAG, "OnSuccess: " + s);
                 if (s.contains("NULL")) {
-                    Log.d(TAG, "OnSuccess: " + "没有该类商品");
                     mWares = new ArrayList<>();
                 }else {
                     CategoryWares<List<Ware>> wares = JSONUtil
@@ -176,22 +180,22 @@ public class CategoryFragment extends BaseFragment {
 
             @Override
             public void onError(Response response, int code, Exception e) {
-                Toast.makeText(getActivity(), "网络出错" + code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.netword_fail + code, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void initWaresRecyclerView(List<Ware> wares){
-
-        WaresAdapter adapter = new WaresAdapter(WaresAdapter.ITEMLAYOUTTYPE.HORIZONTAL,wares);
-        adapter.setOnItemClickListener((v, position) -> {
-            Intent intent = new Intent(getActivity(), WareDetailActivity.class);
-            intent.putExtra("good", mWares.get(position));
-            startActivity(intent);
-        });
-        mWaresRV.setAdapter(adapter);
-        mWaresRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mWaresRV.setItemAnimator(new DefaultItemAnimator());
+        if (wares != null) {
+            WaresAdapter adapter = new WaresAdapter(WaresAdapter.ITEMLAYOUTTYPE.HORIZONTAL,wares);
+            adapter.setOnItemClickListener((v, position) -> {
+                Intent intent = new Intent(getActivity(), WareDetailActivity.class);
+                intent.putExtra("good", mWares.get(position));
+                startActivity(intent);
+            });
+            mWaresRV.setAdapter(adapter);
+            mWaresRV.setLayoutManager(new LinearLayoutManager(getContext()));
+            mWaresRV.setItemAnimator(new DefaultItemAnimator());
+        }
     }
-
 }

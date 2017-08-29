@@ -32,6 +32,13 @@ public class HomeFragment extends BaseFragment {
     private LayoutInflater mInflater;
 
 
+    /**
+     * 加载 Fragment View
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mInflater = inflater;
@@ -39,16 +46,22 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * 加载子 View
+     * @param view 当前Fragment View
+     */
     @Override
     public void initView(View view) {
         mTabHost = (FragmentTabHost) view.findViewById(R.id.home_tabhost);
-
     }
 
+    /**
+     * 初始化 TabHost数据，创建 Fragment
+     */
     @Override
     public void initData() {
 
-        if (mTabHost != null){
+        if (mTabHost != null){          //  创建Tab
             Tab home = new Tab(R.string.recommend,0,RecommendFragment.class);
             Tab cart = new Tab(R.string.preference,0,PreferenceFragment.class);
             Tab category = new Tab(R.string.market,0,MarketFragment.class);
@@ -63,7 +76,7 @@ public class HomeFragment extends BaseFragment {
             mTabHost.setup(getActivity(), getChildFragmentManager(),
                     android.R.id.tabcontent);
 
-            for (Tab tab : mTabs) {
+            for (Tab tab : mTabs) {     // 创建 Fragment
                 Log.d("initData: ", "----initData:---- ");
                 TabHost.TabSpec tabSpec = mTabHost.newTabSpec(getString(tab.getTitle()));
                 tabSpec.setIndicator(buildIndicator(getString(tab.getTitle())));
@@ -72,11 +85,15 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 为 TabHost 创建指 tab 示器
+     * @param title 标题
+     * @return tab
+     */
     private View buildIndicator(String title){
         View view = mInflater.inflate(R.layout.home_tab_indicator,null);
         TextView textView = (TextView) view.findViewById(R.id.txt_home_tab_indacator);
         textView.setText(title);
-        textView.setBackgroundResource(R.drawable.selector_bg_tab);
         return view;
     }
 

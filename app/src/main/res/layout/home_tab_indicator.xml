@@ -10,6 +10,7 @@
         android:layout_margin="3dp"
         android:padding="3dp"
         android:textSize="15sp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/selector_tab_text"/>
 
 </LinearLayout>

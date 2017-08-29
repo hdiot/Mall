@@ -17,7 +17,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private LayoutInflater mInflater;
     private CategoryItemOnClickListener mItemListener;
 
-    public static final String[] categorys = {"¸ÌéÙÀà", "½¬¹ûÀà", "ÈÊ¹ûÀà", "¼á¹ûÀà", "ºË¹ûÀà", "¹ÏÀà", "ÆäËû"};
+    //public static final String[] categorys = {"æŸ‘æ©˜ç±»", "æµ†æžœç±»", "ä»æžœç±»", "åšæžœç±»", "æ ¸æžœç±»", "ç“œç±»", "å…¶ä»–"};
+    public static final String[] categorys = {"æŸ‘æ©˜ç±»", "æµ†æžœç±»", "ä»æžœç±»", "åšæžœç±»", "æ ¸æžœç±»", "ç“œç±»", "å…¶ä»–"};
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

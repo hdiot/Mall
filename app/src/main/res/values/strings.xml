@@ -15,5 +15,37 @@
         [{"id":"100001","name":"橙子","category":"柑橘类","price":5.6,"sales_volume":800,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/柑橘类image/柠檬-柑橘类.png","producing_area":"河南"},{"id":"100002","name":"柑桔","category":"柑橘类","price":6.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/柑橘类image/柑桔-柑橘类.png","producing_area":"山东"},{"id":"100003","name":"柠檬","category":"柑橘类","price":7.7,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/柑橘类image/橙子-柑橘类.png","producing_area":"济南"},{"id":"200001","name":"哈密瓜","category":"瓜类","price":8.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/瓜类image/哈密瓜-瓜类.png","producing_area":"山东"},{"id":"200002","name":"木瓜","category":"瓜类","price":4.5,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/瓜类image/木瓜-瓜类.png","producing_area":"济南"},{"id":"200003","name":"西瓜","category":"瓜类","price":3.2,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/瓜类image/西瓜-瓜类.png","producing_area":"山东"},{"id":"200004","name":"香瓜","category":"瓜类","price":5.5,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/瓜类image/香瓜-瓜类.png","producing_area":"北京"},{"id":"300001","name":"李子","category":"核果类","price":8.8,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/仁果类image/枇杷-仁果类.png","producing_area":"山东"},{"id":"300002","name":"桃子","category":"核果类","price":9.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/仁果类image/苹果-仁果类.png","producing_area":"济南"},{"id":"300003","name":"杏子","category":"核果类","price":5.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/仁果类image/山楂-仁果类.png","producing_area":"山东"},{"id":"400001","name":"板栗","category":"坚果类","price":2.3,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/大白菜-其它.png","producing_area":"济南"},{"id":"400002","name":"核桃","category":"坚果类","price":6.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/大米-其它.png","producing_area":"广东"},{"id":"400003","name":"开心果","category":"坚果类","price":9.9,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/番茄-其它.png","producing_area":"山东"},{"id":"500001","name":"草莓","category":"浆果类","price":5.5,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/胡萝卜-其它.png","producing_area":"北京"},{"id":"500002","name":"猕猴桃","category":"浆果类","price":6.6,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/黄瓜-其它.png","producing_area":"河南"},{"id":"500003","name":"葡萄","category":"浆果类","price":8.8,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/鸡蛋-其它.png","producing_area":"山东"},{"id":"500004","name":"桑葚","category":"浆果类","price":8.9,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/苦瓜-其它.png","producing_area":"山东"},{"id":"500005","name":"香蕉","category":"浆果类","price":8.5,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/生菜-其它.png","producing_area":"河南"},{"id":"500006","name":"杨桃","category":"浆果类","price":8.4,"sales_volume":0,"picture_name_path":"http://119.23.33.62:8080/Fruit_Store/GoodsImage/其它image/猪肉-其它.png","producing_area":"北京"}]
     </string>
     <string name="title_activity_login">登录</string>
+    <string name="synthetical">综合</string>
+    <string name="tab_synthetical">TAG_COMPRE</string>
+    <string name="salesvolume">销量</string>
+    <string name="tab_salesvolume">TAG_VOLUNE</string>
+    <string name="price">价格</string>
+    <string name="tag_price">TAG_PRICE</string>
+    <string name="netword_fail">网络出错</string>
+    <string name="not_login">尚未登录</string>
+    <string name="user_existed">该用户已存在</string>
+    <string name="registe_success">注册成功</string>
+    <string name="registe_key_name">user_name</string>
+    <string name="registe_key_password">password</string>
+    <string name="please_to_input_name_pwd">请输入用户名和密码</string>
+    <string name="user_not_exist">账号不存在</string>
+    <string name="password_error">密码错误</string>
+    <string name="login_key_name">name</string>
+    <string name="login_key_pwd">password</string>
+    <string name="melon">瓜类</string>
+    <string name="orange">橘类</string>
+    <string name="pome">仁果</string>
+    <string name="other">其他</string>
+    <string name="please_check_netword">请检查你的手机是否开启数据</string>
+    <string name="konw_it">知道了</string>
+    <string name="address_not_set">未填写收件人信息</string>
+    <string name="address_can_not_null">收件人信息不能为空</string>
+    <string name="shopcart_is_null">购物车为空，赶紧添加吧</string>
+    <string name="please_choose_wares">请选择商品</string>
+    <string name="add_into_car_successful">成功加入购物车</string>
+    <string name="unit">元/斤</string>
+    <string name="upload_succeed">上传成功</string>
+    <string name="please_to_login">请先登录</string>
+    <string name="login_overdue">登录已失效</string>
 
 </resources>

@@ -29,7 +29,7 @@ import com.mebee.mall.adapter.CartAdapter;
 import com.mebee.mall.bean.Address;
 import com.mebee.mall.bean.OrderWareInfo;
 import com.mebee.mall.bean.RequestOrderInfo;
-import com.mebee.mall.bean.ResponseMessage;
+import com.mebee.mall.bean.ResMessage;
 import com.mebee.mall.bean.ShoppingCart;
 import com.mebee.mall.http.BaseCallback;
 import com.mebee.mall.http.OkhttpHelper;
@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -58,8 +59,7 @@ import okhttp3.Response;
 public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpdateListener{
 
 
-
-
+    private static final String MEBEE_MALL = "MEBEE_MALL";
     private CartProvider mCartProvider;
     private CartAdapter mCartAdapter;
     private RecyclerView mRecyclerView;
@@ -103,7 +103,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         mUserProvider = UserProvider.getInstance(getContext());
         mOkhttpHelper = OkhttpHelper.getInstance();
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("MEBEE_MALL", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(MEBEE_MALL, Context.MODE_PRIVATE);
 
         Log.d(TAG, "createView: "+preferences.getString("cart_json","---"));
 
@@ -124,7 +124,6 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         TV_Tel = (TextView) view.findViewById(R.id.txt_tel_cart);
         TV_Address = (TextView) view.findViewById(R.id.txt_address_cart);
     }
-
 
     @Override
     public void initData() {
@@ -153,7 +152,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         } else {
             TV_Name.setText("");
             TV_Tel.setText("");
-            TV_Address.setText("未选择收件人信息");
+            TV_Address.setText(R.string.address_not_set);
         }
     }
 
@@ -250,7 +249,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         String addr = ReceiverAddress.getText().toString();
 
         if (name.equals("")||tel.equals("")||addr.equals("")){
-            Toast.makeText(getContext(), "信息不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.address_can_not_null, Toast.LENGTH_SHORT).show();
         } else {
             Address address = new Address();
             address.setName(name);
@@ -266,7 +265,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
     private void createOrder() {
 
         if (mAddress == null) {
-            Toast.makeText(getContext(), "请添加地址", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.address_not_set, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -288,9 +287,8 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
             orderInfo.setAddressname(mAddress.getName());
             orderInfo.setTelephone(mAddress.getTel());
             mOkhttpHelper.setmSessionid(mUserProvider.getmCookie());
-            Log.d(TAG, "createOrder: " +requestOrderInfo2Json(orderInfo));
             mOkhttpHelper.doPost(Constant.API.INSERTORDER_API, requestOrderInfo2Json(orderInfo),
-                    new BaseCallback<ResponseMessage<String>>() {
+                    new BaseCallback<ResMessage<String>>() {
                 @Override
                 public void onRequestBefore(Request request) {
                     Log.d(TAG, "onRequestBefore: ");
@@ -298,14 +296,15 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
 
                 @Override
                 public void onFailure(Request request, IOException e) {
-                    Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.netword_fail, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void OnSuccess(Response response, ResponseMessage responseMessage) {
-                    Log.d(TAG, "OnSuccess: " + responseMessage.getResult().toString());
+                public void OnSuccess(Response response, ResMessage resMessage) {
+                    Log.d(TAG, "OnSuccess: " + resMessage.getResult().toString());
                     Intent intent = new Intent(getActivity(), OrderActivity.class);
                     intent.putExtra("charge",summationCart);
+                    intent.putExtra("address", (Serializable) mAddress);
                     startActivity(intent);
                     mCartAdapter.deleteCart();
 
@@ -313,12 +312,12 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
 
                 @Override
                 public void onError(Response response, int code, Exception e) {
-                    Toast.makeText(getActivity(), "网络出错" + code, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.netword_fail + code, Toast.LENGTH_SHORT).show();
                 }
             });
 
         } else {
-            Toast.makeText(getContext(), "请选择商品", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.please_choose_wares, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -334,6 +333,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, "requestOrderInfo2Json: " + jsonObject.toString());
 
         return jsonObject==null? "" : jsonObject.toString();
     }
@@ -342,7 +342,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
     public void initRecyclerView() {
         List<ShoppingCart> carts = mCartProvider.getAll();
         if (carts == null || carts.size()==0) {
-            Toast.makeText(getContext(), "购物车空空如也，赶紧添加吧", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.shopcart_is_null, Toast.LENGTH_SHORT).show();
         }
         mTotalPrice.setText(mCartProvider.getTotalPrice()+"");
         mCartAdapter = new CartAdapter(getContext(),carts,this);

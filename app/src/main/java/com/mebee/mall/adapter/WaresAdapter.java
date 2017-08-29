@@ -1,18 +1,24 @@
 package com.mebee.mall.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.mebee.mall.R;
+import com.mebee.mall.activity.WareDetailActivity;
 import com.mebee.mall.bean.Ware;
 import com.mebee.mall.utils.CartProvider;
 
 import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  *
@@ -29,6 +35,8 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
     private View mView;
     private OnItemClickListener mListener;
     private CartProvider mProvider;
+    private Context mContext;
+
 
     public interface OnItemClickListener {
         void onClick(View v, int position);
@@ -43,10 +51,6 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
         HORIZONTAL
     }
 
-    public void setFilter(List<Ware> wares) {
-        mWares = wares;
-        notifyDataSetChanged();
-    }
 
     public WaresAdapter(ITEMLAYOUTTYPE itemlayoutType, List<Ware> wares) {
         this.mWares = wares;
@@ -55,7 +59,7 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
 
     @Override
     public WaresAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+        mContext = parent.getContext();
         mInflater = LayoutInflater.from(parent.getContext());
         mProvider = CartProvider.getInstance(parent.getContext());
         if (mLayoutType == ITEMLAYOUTTYPE.VERTICAL) {
@@ -76,13 +80,16 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 mProvider.put(mWares.get(position));
+                Toast.makeText(mContext, R.string.add_into_car_successful, Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.ItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClick(v,position);
+                Intent intent = new Intent(mContext, WareDetailActivity.class);
+                intent.putExtra("good", mWares.get(position));
+                startActivity(mContext,intent,null);
             }
         });
     }
@@ -110,6 +117,46 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
             addIntoCart = (Button) itemView.findViewById(R.id.btn_add_into_cart);
             ItemView = itemView;
         }
+    }
+
+    public void loadMoreData(List<Ware> wares){
+        if (wares != null) {
+            int begin = getDataSize();
+            addData(wares,begin);
+        }
+    }
+
+    private int getDataSize() {
+        return mWares == null? 0:mWares.size();
+    }
+
+    public void refreshData(List<Ware> wares){
+        if (wares != null) {
+            clearAll();
+            addData(wares);
+        }
+    }
+
+    private void addData(List<Ware> wares){
+        addData(wares,0);
+    }
+
+    private void addData(List<Ware> wares, int position){
+        if (wares != null && wares.size() >= 0) {
+            mWares.addAll(position,wares);
+            notifyItemRangeInserted(position,wares.size());
+        }
+
+    }
+
+    private void clearAll(){
+        if (mWares != null)
+            mWares.clear();
+        notifyDataSetChanged();
+    }
+
+    public List<Ware> getDatas(){
+        return mWares;
     }
 
 }

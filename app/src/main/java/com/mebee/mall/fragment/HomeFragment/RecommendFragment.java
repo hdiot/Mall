@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -23,6 +25,7 @@ import com.mebee.mall.bean.SliderLayoutData;
 import com.mebee.mall.fragment.BaseFragment;
 import com.mebee.mall.http.BaseCallback;
 import com.mebee.mall.http.OkhttpHelper;
+import com.mebee.mall.utils.Constant;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +42,8 @@ public class RecommendFragment extends BaseFragment {
     private LayoutInflater mInflater;
     private SliderLayout mSliderLayout;
     private RecyclerView mRecyclerView;
+    private ProgressBar mProgressBar;
+    private TextView mTxtWarm;
     private OkhttpHelper mOkHttpHelper = OkhttpHelper.getInstance();
     private List<Ware> mWares;
 
@@ -53,6 +58,14 @@ public class RecommendFragment extends BaseFragment {
     public void initView(View view) {
         mSliderLayout = (SliderLayout) view.findViewById(R.id.recommend_slider);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recommend_recyler);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.pb_recommend);
+        mTxtWarm = (TextView) view.findViewById(R.id.txt_fail_warm_recommend);
+        mTxtWarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initRecyclerData();
+            }
+        });
     }
 
     @Override
@@ -68,10 +81,10 @@ public class RecommendFragment extends BaseFragment {
 
         List<SliderLayoutData> sList = new ArrayList<>();
 
-        SliderLayoutData sData1 = new SliderLayoutData("πœ¿‡","http://119.23.33.62:8080/Fruit_Store/upload/mebee/8639B4A841C817B897F231984A5C2A9E.jpg");
-        SliderLayoutData sData2 = new SliderLayoutData("ÈŸ¿‡","http://119.23.33.62:8080/Fruit_Store/GoodsImage/∏ÃÈŸ¿‡image/≥»◊”-∏ÃÈŸ¿‡.png");
-        SliderLayoutData sData3 = new SliderLayoutData("» π˚","http://119.23.33.62:8080/Fruit_Store/GoodsImage/» π˚¿‡image/Ë¡ËÀ-» π˚¿‡.png");
-        SliderLayoutData sData4 = new SliderLayoutData("∆‰À˚","http://119.23.33.62:8080/Fruit_Store/GoodsImage/∆‰À¸image/…˙≤À-∆‰À¸.png");
+        SliderLayoutData sData1 = new SliderLayoutData(getString(R.string.melon),"http://news.xinhuanet.com/food/2015-10/15/128316374_14447844701091n.jpg");
+        SliderLayoutData sData2 = new SliderLayoutData(getString(R.string.orange),"http://119.23.33.62:8080/Fruit_Store/GoodsImage/ÊüëÊ©òÁ±ªimage/Ê©ôÂ≠ê-ÊüëÊ©òÁ±ª.png");
+        SliderLayoutData sData3 = new SliderLayoutData(getString(R.string.pome),"http://119.23.33.62:8080/Fruit_Store/GoodsImage/‰ªÅÊûúÁ±ªimage/ÊûáÊù∑-‰ªÅÊûúÁ±ª.png");
+        SliderLayoutData sData4 = new SliderLayoutData(getString(R.string.other),"http://119.23.33.62:8080/Fruit_Store/GoodsImage/ÂÖ∂ÂÆÉimage/ÁîüËèú-ÂÖ∂ÂÆÉ.png");
 
         sList.add(sData1);
         sList.add(sData2);
@@ -143,26 +156,26 @@ public class RecommendFragment extends BaseFragment {
             }
         });*/
         mRecyclerView.setLayoutManager(layoutManager);
-        //mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
+        mProgressBar.setVisibility(View.GONE);
+        mTxtWarm.setVisibility(View.GONE);
     }
 
     @Override
     public void initRecyclerData() {
         super.initRecyclerData();
-        String url = "http://119.23.33.62:8080/Fruit_Store/fruit/getAll.action";
-        mOkHttpHelper.doPost(url, "", new BaseCallback<List<Ware>>() {
+        mOkHttpHelper.doPost(Constant.API.ALL_WARES, "", new BaseCallback<List<Ware>>() {
 
             @Override
             public void onRequestBefore(Request request) {
-
+                mProgressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(getActivity(), "Õ¯¬Á≥ˆ¥Ì", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.netword_fail), Toast.LENGTH_SHORT).show();
+                mProgressBar.setVisibility(View.GONE);
+                mTxtWarm.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -171,13 +184,16 @@ public class RecommendFragment extends BaseFragment {
                 for (Ware ware : wares) {
                     Log.d("OkHttpHelper", "id: "+ ware.getId()+"--"+"name: "+ ware.getName());
                 }
+                mProgressBar.setVisibility(View.GONE);
+                mTxtWarm.setVisibility(View.GONE);
                 mWares = wares;
                 setRecyclerLayout();
             }
 
             @Override
             public void onError(Response response, int code, Exception e) {
-                Toast.makeText(getActivity(), "Õ¯¬Á≥ˆ¥Ì" + code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.netword_fail) + code, Toast.LENGTH_SHORT).show();
+                mTxtWarm.setVisibility(View.VISIBLE);
             }
         });
 
