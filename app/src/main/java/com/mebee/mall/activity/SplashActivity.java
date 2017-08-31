@@ -52,6 +52,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         mView = LayoutInflater.from(this).inflate(R.layout.activity_splash,null);
         setContentView(mView);
+
         mOkHttpHelper = OkhttpHelper.getInstance();
         mUserProvider = UserProvider.getInstance(this);
         biludAlert();
@@ -184,6 +185,7 @@ public class SplashActivity extends Activity {
     private void call2Login(){
         mUserProvider.clearData();
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        finish();
     }
 
     /**

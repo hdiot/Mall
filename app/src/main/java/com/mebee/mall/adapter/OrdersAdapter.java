@@ -1,10 +1,9 @@
 package com.mebee.mall.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +25,15 @@ import static android.support.v4.content.ContextCompat.startActivity;
 public class OrdersAdapter extends BaseExpandableListAdapter {
 
     private static final String TAG = "OrdersAdapter";
+    private static final String ADDRESSID = "addressid";
+    private static final String ORDERID = "orderid";
+    private static final String ORDERSTATE = "orderstate";
     private List<List<ResOrderInfo>> mDatas;
 
     private final String [] mStates = {"全部订单", "待付款" , "代发货" , "待收货", "待评论"};
-    private Context mContext;
+    private Activity mContext;
 
-    public OrdersAdapter(List<List<ResOrderInfo>> mDatas, Context context) {
+    public OrdersAdapter(List<List<ResOrderInfo>> mDatas, Activity context) {
         this.mDatas = mDatas;
         this.mContext = context;
     }
@@ -107,27 +109,30 @@ public class OrdersAdapter extends BaseExpandableListAdapter {
         ResOrderInfo info = (ResOrderInfo) getChild(groupPosition,childPosition);
         switch (info.getOrder_state()) {
             case 0:
-                childViewHolder.tvState.setText("待付款");
+                childViewHolder.tvState.setText(mContext.getString(R.string.order_state) + mContext.getString(R.string.wait_for_pay));
                 break;
             case 1:
-                childViewHolder.tvState.setText("代发货");
+                childViewHolder.tvState.setText(mContext.getString(R.string.order_state)+mContext.getString(R.string.wait_for_deliver));
                 break;
             case 2:
-                childViewHolder.tvState.setText("待收货");
+                childViewHolder.tvState.setText(mContext.getString(R.string.order_state)+mContext.getString(R.string.wait_for_receive));
                 break;
             case 3:
-                childViewHolder.tvState.setText("待评论");
+                childViewHolder.tvState.setText(mContext.getString(R.string.order_state)+mContext.getString(R.string.wait_for_comment));
                 break;
         }
         childViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                intent.putExtra(ORDERID,info.getId());
+                intent.putExtra(ADDRESSID, info.getAddress_id());
+                intent.putExtra(ORDERSTATE, info.getOrder_state());
+                mContext.finish();
                 startActivity(mContext,intent,null);
-                Log.d(TAG, "onClick: ");
             }
         });
-        childViewHolder.tvId.setText(info.getId());
+        childViewHolder.tvId.setText(mContext.getString(R.string.order_id)+info.getId());
         childViewHolder.rvImg.setAdapter(new OrderItemImgAdapter());
         childViewHolder.rvImg.setLayoutManager(new GridLayoutManager(mContext,3));
         convertView.requestFocus();

@@ -27,7 +27,7 @@ public class JSONUtil {
 
     public static <T> T fromJson(String json,Type type){
 
-        return  gson.fromJson(json,type);
+           return  gson.fromJson(json,type);
     }
 
 

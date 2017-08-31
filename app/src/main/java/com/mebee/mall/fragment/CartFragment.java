@@ -149,10 +149,12 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
             TV_Name.setText(mAddress.getName());
             TV_Tel.setText(mAddress.getTel());
             TV_Address.setText(mAddress.getAddress());
+            TV_Name.setVisibility(View.VISIBLE);
+            TV_Tel.setVisibility(View.VISIBLE);
         } else {
-            TV_Name.setText("");
-            TV_Tel.setText("");
             TV_Address.setText(R.string.address_not_set);
+            TV_Name.setVisibility(View.GONE);
+            TV_Tel.setVisibility(View.GONE);
         }
     }
 
@@ -284,7 +286,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         }
         if (wareInfoList.size() != 0){
             orderInfo.setWareList(wareInfoList);
-            orderInfo.setAddressname(mAddress.getName());
+            orderInfo.setAddressname(mAddress.getAddress());
             orderInfo.setTelephone(mAddress.getTel());
             mOkhttpHelper.setmSessionid(mUserProvider.getmCookie());
             mOkhttpHelper.doPost(Constant.API.INSERTORDER_API, requestOrderInfo2Json(orderInfo),
@@ -344,7 +346,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
         if (carts == null || carts.size()==0) {
             Toast.makeText(getContext(), R.string.shopcart_is_null, Toast.LENGTH_SHORT).show();
         }
-        mTotalPrice.setText(mCartProvider.getTotalPrice()+"");
+        mTotalPrice.setText(mCartProvider.getTotalPrice()+getString(R.string.rmb));
         mCartAdapter = new CartAdapter(getContext(),carts,this);
         mRecyclerView.setAdapter(mCartAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -352,7 +354,7 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
 
     @Override
     public void onUpdate() {
-        mTotalPrice.setText(mCartProvider.getTotalPrice()+"?");
+        mTotalPrice.setText(mCartProvider.getTotalPrice()+getString(R.string.rmb));
     }
 
     @Override

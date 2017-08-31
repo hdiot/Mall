@@ -10,13 +10,10 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_login"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#00b850"
-        app:navigationIcon="@drawable/ic_navigate_before_black_24dp"
-        app:title="登录">
-
-    </android.support.v7.widget.Toolbar>
+        style="@style/toolbar"
+        app:navigationIcon="@drawable/selector_back_icon"
+        app:titleTextColor="@color/white"
+        app:title="登录"/>
 
     <LinearLayout
         android:layout_width="match_parent"

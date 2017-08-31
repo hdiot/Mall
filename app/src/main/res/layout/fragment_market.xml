@@ -9,9 +9,8 @@
    <com.mebee.mall.widget.MyToolbar
        android:id="@+id/toolbar_market"
        android:layout_width="match_parent"
-       android:layout_marginLeft="20dp"
-       android:layout_marginRight="20dp"
        android:layout_height="50dp"
+       android:background="@color/colorPrimaryDark"
        app:isShowSearchView="true">
    </com.mebee.mall.widget.MyToolbar>
 
@@ -19,8 +18,10 @@
         android:id="@+id/tablayout_market"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:background="@color/colorPrimaryDark"
         app:tabIndicatorHeight="0dp"
-        app:tabTextColor="@color/selector_tab_text"/>
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="@color/black"/>
 
     <View
         android:layout_width="match_parent"

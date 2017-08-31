@@ -24,12 +24,12 @@ public class OrderItemImgAdapter extends RecyclerView.Adapter<OrderItemImgAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.simpleDraweeView.setImageURI("");
     }
 
     @Override
     public int getItemCount() {
-        return 18;
+        return 3;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

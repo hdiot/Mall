@@ -38,6 +38,7 @@ import okhttp3.Response;
  * Created by mebee on 2017/8/1.
  */
 public class RecommendFragment extends BaseFragment {
+    private static final String TAG = "RecommendFragment";
 
     private LayoutInflater mInflater;
     private SliderLayout mSliderLayout;
@@ -143,18 +144,12 @@ public class RecommendFragment extends BaseFragment {
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
+                /*return position%4==0?3:1;*/
                 return position==0?3:1;
+
             }
         });
-        /*mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
 
-            @Override
-            public void getItemOffsets(Rect outRect, View view,
-                                       RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.bottom = 20;
-            }
-        });*/
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mProgressBar.setVisibility(View.GONE);

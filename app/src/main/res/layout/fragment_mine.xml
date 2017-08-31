@@ -31,6 +31,9 @@
                     app:actualImageScaleType="centerCrop"
                     app:placeholderImage="@mipmap/head"
                     app:placeholderImageScaleType="centerCrop"
+                    app:progressBarImage="@mipmap/pic_loading"
+                    app:progressBarAutoRotateInterval="1000"
+                    app:failureImage="@mipmap/pic_load_fail"
                     app:roundAsCircle="true"/>
 
                 <TextView

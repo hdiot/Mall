@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.mebee.mall.R;
+import com.mebee.mall.activity.SearchActivity;
 import com.mebee.mall.activity.WareDetailActivity;
 import com.mebee.mall.adapter.CategoryAdapter;
 import com.mebee.mall.adapter.WaresAdapter;
@@ -64,6 +65,7 @@ public class CategoryFragment extends BaseFragment {
         mCategoryRV = (RecyclerView) view.findViewById(R.id.rv_categorylist);
         mWaresRV = (RecyclerView) view.findViewById(R.id.rv_wares_caregory);
         mTabLayout = (TabLayout) view.findViewById(R.id.tablayout_category);
+        initToolbar();
     }
 
     @Override
@@ -77,6 +79,12 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public void initToolbar() {
         super.initToolbar();
+        mToolbar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+            }
+        });
     }
 
     private void initTabLayout(){

@@ -20,6 +20,10 @@ public class Constant {
         public static final String UPLOAD_PICTURE_API = BASE_API + "user/picture.action";
         public static final String GET_ALL_ADDRESS_API = BASE_API + "order/getAllAddress.action";
         public static final String GET_ALL_ORDERS = BASE_API + "order/findByName.action";
-
+        public static final String GET_ADDRESS_BY_ID = BASE_API + "order/findById.action";
+        public static final String GET_ALL_WARES_BY_ORDER_ID = BASE_API + "order/getAllGoods.action" ;
+        public static final String GET_WARE_BY_ID = BASE_API + "fruit/getById.action";
+        public static final String CHANGE_ORDER_STATE = BASE_API + "order/updatestate.action";
+        public static final String DELETE_ORDER_BY_ID = BASE_API + "order/deleteorder.action";
     }
 }

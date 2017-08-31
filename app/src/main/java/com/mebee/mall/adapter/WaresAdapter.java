@@ -63,7 +63,11 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
         mInflater = LayoutInflater.from(parent.getContext());
         mProvider = CartProvider.getInstance(parent.getContext());
         if (mLayoutType == ITEMLAYOUTTYPE.VERTICAL) {
-            mView = mInflater.inflate(R.layout.ware_item_view_vertical,parent,false);
+            if (viewType == 0) {
+                mView = mInflater.inflate(R.layout.ware_item_view_horizon,parent,false);
+            } else {
+                mView = mInflater.inflate(R.layout.ware_item_view_vertical,parent,false);
+            }
         }else {
             mView = mInflater.inflate(R.layout.ware_item_view_horizon,parent,false);
         }
@@ -74,7 +78,7 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.goodImage.setImageURI(mWares.get(position).getPicture_name_path());
         holder.goodName.setText(mWares.get(position).getName());
-        holder.goodPrice.setText(String.valueOf(mWares.get(position).getPrice())+"ิช/ฝ๏");
+        holder.goodPrice.setText(mWares.get(position).getPrice()+mContext.getString(R.string.unit));
         holder.goodProductPlace.setText(mWares.get(position).getProducing_area());
         holder.addIntoCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +98,10 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
         });
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position== 0 ? 0 : 1;
+    }
 
     @Override
     public int getItemCount() {

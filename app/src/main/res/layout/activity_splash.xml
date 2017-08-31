@@ -4,6 +4,14 @@
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/app_bg"
+    android:background="@mipmap/splash_bg"
     tools:context="com.mebee.mall.activity.SplashActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:text="百联优果，您的优果"/>
 </RelativeLayout>

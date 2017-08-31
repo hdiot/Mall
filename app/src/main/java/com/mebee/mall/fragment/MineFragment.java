@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.reflect.TypeToken;
 import com.mebee.mall.R;
 import com.mebee.mall.activity.LoginActivity;
+import com.mebee.mall.activity.MineActivity;
 import com.mebee.mall.adapter.OrdersAdapter;
 import com.mebee.mall.bean.ResMessage;
 import com.mebee.mall.bean.ResOrderInfo;
@@ -69,7 +70,8 @@ public class MineFragment extends BaseFragment {
         return view;
     }
 
-    /** 初始化 当前Fragment  的子 View
+    /**
+     * 初始化 当前Fragment  的子 View
      * @param view Fragment 的 View
      */
     @Override
@@ -86,7 +88,7 @@ public class MineFragment extends BaseFragment {
      */
     @Override
     public void initData() {
-        // 获取用户信息
+        // ?????????
         mUser = mUserProvider.getmUser();
         if (mUser != null) {        // 用户信息不为 null，则显示用户信息
             Log.d(TAG, "initUserInfo: " + mUserProvider.getmUser().getHead_path());
@@ -100,7 +102,8 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    /**set
+    /**
+     * set
      * 为View 设置点击监听
      */
     private void setOnlicekListener() {
@@ -108,10 +111,10 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                if (mUser != null)
+                if (mUser == null)
                     intent = new Intent(getActivity(), LoginActivity.class);
                 else
-                    intent = new Intent(getActivity(), LoginActivity.class);
+                    intent = new Intent(getActivity(), MineActivity.class);
                 startActivity(intent);
             }
         });
@@ -205,7 +208,7 @@ public class MineFragment extends BaseFragment {
         mOrders.add(list2);
         mOrders.add(list3);
 
-        OrdersAdapter adapter = new OrdersAdapter(mOrders,getContext());
+        OrdersAdapter adapter = new OrdersAdapter(mOrders,getActivity());
         mListView.setAdapter(adapter);
     }
 

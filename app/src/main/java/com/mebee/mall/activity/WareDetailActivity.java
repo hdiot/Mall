@@ -2,16 +2,20 @@ package com.mebee.mall.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mebee.mall.R;
+import com.mebee.mall.adapter.CommentAdapter;
 import com.mebee.mall.bean.Ware;
 
 import butterknife.BindView;
@@ -21,28 +25,29 @@ public class WareDetailActivity extends Activity {
 
     @BindView(R.id.toolbar_ware_detail)
     Toolbar toolbarWareDetail;
-    @BindView(R.id.slider_ware_detail)
-    SliderLayout sliderWareDetail;
-    @BindView(R.id.txt_ware_name)
-    TextView txtWareName;
-    @BindView(R.id.txt_ware_price)
-    TextView txtWarePrice;
-    @BindView(R.id.bt_reduce_ware)
-    Button btReduceWare;
-    @BindView(R.id.et_volume_ware)
-    EditText etVolumeWare;
-    @BindView(R.id.bt_add_ware)
-    Button btAddWare;
+    @BindView(R.id.slider_ware_wareDetail)
+    SliderLayout sliderWareWareDetail;
+    @BindView(R.id.txt_wareName_wareDetail)
+    TextView txtWareNameWareDetail;
+    @BindView(R.id.txt_warePrice_wareDetail)
+    TextView txtWarePriceWareDetail;
+    @BindView(R.id.et_volumeWare_wareDetail)
+    EditText etVolumeWareWareDetail;
+    @BindView(R.id.txt_address_wareDetail)
+    TextView txtAddressWareDetail;
+    @BindView(R.id.view_waredetail)
+    View viewWaredetail;
+    @BindView(R.id.btn_add2cart_wareDetail)
+    Button btnAdd2cartWareDetail;
+    @BindView(R.id.txt_carCount_wareDetail)
+    TextView txtCarCountWareDetail;
+    @BindView(R.id.img_cart_wareDetail)
+    ImageView imgCartWareDetail;
+    @BindView(R.id.txt_commentCount_wareDetail)
+    TextView txtCommentCountWareDetail;
+    @BindView(R.id.rv_comment_wareDeatil)
+    RecyclerView rvCommentWareDeatil;
     private Ware mWare;
-
-    /*private OkhttpHelper mOkhttpHelper;
-    private Toolbar toolbarWareDetail;
-    private SliderLayout sliderWareDetail;
-    private TextView txtWareName;
-    private TextView txtWarePrice;
-    private EditText etVolumeWare;
-    private Button btReduceWare;
-    private Button btAddWare;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,27 +55,20 @@ public class WareDetailActivity extends Activity {
         setContentView(R.layout.activity_ware_detail);
         ButterKnife.bind(this);
         mWare = (Ware) getIntent().getSerializableExtra("good");
+
         initView();
     }
 
     private void initView() {
-        toolbarWareDetail = (Toolbar) findViewById(R.id.toolbar_ware_detail);
-        etVolumeWare = (EditText) findViewById(R.id.et_volume_ware);
-        sliderWareDetail = (SliderLayout) findViewById(R.id.slider_ware_detail);
-        txtWareName = (TextView) findViewById(R.id.txt_ware_name);
-        btReduceWare = (Button) findViewById(R.id.bt_reduce_ware);
-        btAddWare = (Button) findViewById(R.id.bt_add_ware);
-        txtWarePrice = (TextView) findViewById(R.id.txt_ware_price);
-
-
+        initWareInfo();
         initToolbar();
         initSlider();
-        initWareInfo();
+        initComment();
     }
 
     private void initWareInfo() {
-        txtWareName.setText(mWare.getName());
-        txtWarePrice.setText(String.valueOf(mWare.getPrice()));
+        txtWareNameWareDetail.setText(mWare.getName());
+        txtWarePriceWareDetail.setText(mWare.getPrice() + getString(R.string.unit));
     }
 
     private void initToolbar() {
@@ -87,6 +85,13 @@ public class WareDetailActivity extends Activity {
         textSliderView
                 .image(mWare.getPicture_name_path())
                 .setScaleType(BaseSliderView.ScaleType.Fit);
-        sliderWareDetail.addSlider(textSliderView);
+        sliderWareWareDetail.addSlider(textSliderView);
     }
+
+    private void initComment() {
+        rvCommentWareDeatil.setLayoutManager(new LinearLayoutManager(this));
+        rvCommentWareDeatil.setAdapter(new CommentAdapter());
+        rvCommentWareDeatil.setNestedScrollingEnabled(false);
+    }
+
 }

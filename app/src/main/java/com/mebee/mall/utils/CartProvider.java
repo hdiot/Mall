@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mebee.mall.bean.ShoppingCart;
 import com.mebee.mall.bean.Ware;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +126,7 @@ public class CartProvider {
     }
 
 
-    public double getTotalPrice(){
+    public String getTotalPrice(){
 
         double totalPrice = 0.00;
         if (mDatas != null) {
@@ -134,12 +134,12 @@ public class CartProvider {
                 ShoppingCart carts =  mDatas.valueAt(i);
                 if (carts.isChecked()) {
                     totalPrice += carts.getPrice() * carts.getCount();
-                    BigDecimal decimal = new BigDecimal(totalPrice);
-                    totalPrice = decimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
                 }
             }
         }
-        return totalPrice;
+        DecimalFormat decimal = new DecimalFormat("#.00");
+        Log.d(TAG, "getTotalPrice: " + decimal.format(totalPrice));
+        return decimal.format(totalPrice);
     }
 
 }

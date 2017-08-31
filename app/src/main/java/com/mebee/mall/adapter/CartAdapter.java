@@ -33,10 +33,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
     private View mView;
     private List<ShoppingCart> mCarts;
     private OnDataUpdateListener mCallBack;
+    private Context mContext;
 
     private static final String TAG = "CartAdapter";
 
     public CartAdapter(Context context, List<ShoppingCart> carts, OnDataUpdateListener callback) {
+        mContext = context;
         mProvider = CartProvider.getInstance(context);
         mCarts = carts;
         mCallBack = callback;
@@ -70,9 +72,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
         holder.isSelected.setChecked(cart.isChecked());
         holder.picture.setImageURI(cart.getPicture_name_path());
         holder.name.setText(cart.getName());
-        holder.price.setText(String.valueOf(cart.getPrice())+"ิช/ฝ๏");
+        holder.price.setText(cart.getPrice()+mContext.getString(R.string.unit));
         holder.volume.setText(String.valueOf(cart.getCount()));
-        holder.totalPrice.setText(getTotalPrice(cart)+"ิช");
+        holder.totalPrice.setText(getTotalPrice(cart)+mContext.getString(R.string.rmb));
         holder.isSelected.setOnCheckedChangeListener((buttonView, isChecked) -> {
             cart.setCheck(!cart.isChecked());
             commit(cart);
@@ -101,7 +103,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>  {
                 cart.setCount(Integer.valueOf(count));
                 commit(cart);
                 mCallBack.onUpdate();
-                holder.totalPrice.setText(getTotalPrice(cart)+"ิช/ฝ๏");
+                holder.totalPrice.setText(getTotalPrice(cart)+mContext.getString(R.string.unit));
             }
         });
 

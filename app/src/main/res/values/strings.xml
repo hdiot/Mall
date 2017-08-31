@@ -47,5 +47,20 @@
     <string name="upload_succeed">上传成功</string>
     <string name="please_to_login">请先登录</string>
     <string name="login_overdue">登录已失效</string>
+    <string name="rmb">元</string>
+    <string name="add_to_cart">加入购物车</string>
+    <string name="weight">斤</string>
+    <string name="order_state">订单状态：</string>
+    <string name="wait_for_pay">待付款</string>
+    <string name="wait_for_deliver">待发货</string>
+    <string name="wait_for_receive">待收货</string>
+    <string name="wait_for_comment">待评论</string>
+    <string name="order_id">订单号：</string>
+    <string name="weight_unit">斤</string>
+    <string name="cancle_order">取消订单</string>
+    <string name="pay_immediately">立即支付</string>
+    <string name="call_deliver">提醒发货</string>
+    <string name="confirm_receipt">确认收货</string>
+    <string name="comment_immediately">立即评论</string>
 
 </resources>
