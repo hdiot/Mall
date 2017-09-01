@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     tools:context="com.mebee.mall.activity.MainActivity">
-
     <FrameLayout
         android:id="@+id/main_tab_cotent"
         android:layout_width="match_parent"

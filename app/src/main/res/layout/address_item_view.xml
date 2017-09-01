@@ -1,36 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:focusable="true"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
+    android:background="@drawable/selector_item_bg"
+    android:padding="10dp"
     android:layout_marginBottom="2dp">
-
-    <CheckBox
-        android:id="@+id/cb_select_addr_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:clickable="false"
-        android:focusableInTouchMode="true"
-        android:layout_margin="20dp"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/ly_address_addr_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -57,11 +38,32 @@
             android:id="@+id/txt_address_addr_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
             android:maxLines="2"
             android:drawablePadding="10dp"
             android:text="广东省湛江市广东海洋大学"/>
 
-    </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/cb_select_addr_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:hint="设为默认" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="right"
+                android:textColor="@color/gray"
+                android:text="长按删除"/>
+        </LinearLayout>
 </LinearLayout>

@@ -13,12 +13,12 @@
         android:background="#00b850"
         app:title="购物车"/>
 
-
     <LinearLayout
         android:id="@+id/layout_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_order"
+        android:background="@drawable/selector_item_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <LinearLayout

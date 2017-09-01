@@ -33,9 +33,13 @@ public class StoreFragment extends BaseFragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //WebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setDomStorageEnabled(true);
 
-        webView.loadUrl("http://119.29.135.33");
+        webView.loadUrl("http://qingmang.me/magazines/");
         webView.setWebViewClient(new WebViewClient(){  //设置不适用第三方浏览器打开网页
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

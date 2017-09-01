@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnSigningLogin;
     @BindView(R.id.txt_registe_login)
     TextView txtRegisteLogin;
+    @BindView(R.id.pg_login)
+    ProgressBar pgLogin;
 
     /*private Toolbar toolbarLogin;
     private ClearEditText etIdLogin;
@@ -133,18 +136,24 @@ public class LoginActivity extends AppCompatActivity {
         mOkhttpHelper.doPost(Constant.API.LOGIN_API, json.toString(), new BaseCallback<String>() {
             @Override
             public void onRequestBefore(Request request) {
-
+                pgLogin.setVisibility(View.VISIBLE);
+                btnSigningLogin.setEnabled(false);
             }
 
             @Override
             public void onFailure(Request request, IOException e) {
                 Toast.makeText(LoginActivity.this, R.string.netword_fail, Toast.LENGTH_SHORT).show();
+                pgLogin.setVisibility(View.GONE);
+                btnSigningLogin.setEnabled(true);
             }
 
             @Override
             public void OnSuccess(Response response, String s) {
+                btnSigningLogin.setEnabled(true);
+                pgLogin.setVisibility(View.GONE);
                 if (s.contains(NOTEXISTERROR)) {
                     Toast.makeText(LoginActivity.this, getString(R.string.user_not_exist), Toast.LENGTH_SHORT).show();
+                    pgLogin.setVisibility(View.GONE);
                     return;
                 }
                 if (s.contains(PASSWORDERROR)) {
@@ -158,14 +167,16 @@ public class LoginActivity extends AppCompatActivity {
                 String cookie = response.headers().get(SET_COOKIE);
                 Log.d(TAG, "OnSuccess: " + s + "--" + cookie);
                 mUserProvider.putUser(loginMsg.getResult(), cookie);
-
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
 
             }
 
             @Override
             public void onError(Response response, int code, Exception e) {
                 Toast.makeText(LoginActivity.this, R.string.netword_fail + code, Toast.LENGTH_SHORT).show();
+                pgLogin.setVisibility(View.GONE);
+                btnSigningLogin.setEnabled(true);
             }
         });
     }

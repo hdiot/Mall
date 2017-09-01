@@ -70,7 +70,7 @@ public class MineActivity extends AppCompatActivity {
         txtAddressManageMine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MineActivity.this, AddressActivity.class));
+                startActivity(new Intent(MineActivity.this, AddressManagerActivity.class));
             }
         });
 

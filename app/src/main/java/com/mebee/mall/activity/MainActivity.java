@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,11 +23,12 @@ import com.mebee.mall.fragment.MineFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+    private static final String TAG = "MainActivity";
 
     private FragmentTabHost mTabHost;
     private LayoutInflater mInflater;
-    private List<Tab> mTabs = new ArrayList<Tab>();
+    private List<Tab> mTabs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
         initTab();
+
     }
 
     /**
@@ -92,5 +95,11 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(tab.getTitle());
         return view;
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.d(TAG, "onTouch: " + event.getX() + "---" + event.getY());
+        return true;
     }
 }
