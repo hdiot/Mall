@@ -60,7 +60,7 @@ public class MineFragment extends BaseFragment {
      * @param inflater
      * @param container
      * @param savedInstanceState
-     * @return view ·µ»Øµ±Ç°Fragment µÄ View
+     * @return view ï¿½ï¿½ï¿½Øµï¿½Ç°Fragment ï¿½ï¿½ View
      */
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,8 +71,8 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * ³õÊ¼»¯ µ±Ç°Fragment  µÄ×Ó View
-     * @param view Fragment µÄ View
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ ï¿½ï¿½Ç°Fragment  ï¿½ï¿½ï¿½ï¿½ View
+     * @param view Fragment ï¿½ï¿½ View
      */
     @Override
     public void initView(View view) {
@@ -84,18 +84,18 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * ³õÊ¼»¯ÓÃ»§Êý¾Ý
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Override
     public void initData() {
         // ?????????
         mUser = mUserProvider.getmUser();
-        if (mUser != null) {        // ÓÃ»§ÐÅÏ¢²»Îª null£¬ÔòÏÔÊ¾ÓÃ»§ÐÅÏ¢
+        if (mUser != null) {        // ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Îª nullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
             Log.d(TAG, "initUserInfo: " + mUserProvider.getmUser().getHead_path());
             mHead.setImageURI(mUserProvider.getmUser().getHead_path().replaceAll("\\\\","\\/"));
             mName.setText(mUserProvider.getmUser().getUser_name());
             getAllOrders();
-        } else {                    // ÓÃ»§ÐÅÏ¢Îª null£¬ÌáÐÑÓÃ»§µÇÂ¼
+        } else {                    // ï¿½Ã»ï¿½ï¿½ï¿½Ï¢Îª nullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼
             Toast.makeText(getContext(), R.string.not_login, Toast.LENGTH_SHORT).show();
             initExpanableListView(null);
         }
@@ -104,7 +104,7 @@ public class MineFragment extends BaseFragment {
 
     /**
      * set
-     * ÎªView ÉèÖÃµã»÷¼àÌý
+     * ÎªView ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void setOnlicekListener() {
         mHead.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * ÉèÖÃÍ·Ïñ
+     * ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½
      * @param requestCode
      * @param resultCode
      * @param data
@@ -138,7 +138,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {     // µ±data²»Îª nullÊ±£¬¸ù¾Ý·µ»ØµÄ URI ÉÏ´«Í·ÏñÍ¼Æ¬
+        if (data != null) {     // ï¿½ï¿½dataï¿½ï¿½Îª nullÊ±ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Øµï¿½ URI ï¿½Ï´ï¿½Í·ï¿½ï¿½Í¼Æ¬
             Log.d(TAG, "onActivityResult: " + data.getData());
             mHead.setImageURI(data.getData());
             mOkhttpHelper.setmSessionid(mUserProvider.getmCookie());
@@ -173,13 +173,13 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * ³õÊ¼»¯ ExpanableListView(¿ÉÕÛµþµÄË«²ãLisView)
-     * @param orders ¶©µ¥ÐÅÏ¢
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ ExpanableListView(ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½Ë«ï¿½ï¿½LisView)
+     * @param orders ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     private void initExpanableListView(List<ResOrderInfo> orders){
 
         mOrders = new LinkedList<>();
-        // ¸ù¾Ý¶©µ¥×´Ì¬Îª¶©µ¥·ÖÀà£¬·Ö±ð·Å½ø²»Í¬ List
+        // ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½×´Ì¬Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½Ö±ï¿½Å½ï¿½ï¿½ï¿½Í¬ List
         List<ResOrderInfo> list0 = new LinkedList<>();
         List<ResOrderInfo> list1 = new LinkedList<>();
         List<ResOrderInfo> list2 = new LinkedList<>();
@@ -213,12 +213,12 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * »ñÈ¡ËùÓÐ¶©µ¥ÐÅÏ¢
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     private void getAllOrders() {
 
         mOkhttpHelper.setmSessionid(mUserProvider.getmCookie());
-        mOkhttpHelper.doPost(Constant.API.GET_ALL_ORDERS, "", new BaseCallback<String>() {
+        mOkhttpHelper.doPost(Constant.API.GET_ALL_ORDERS_API, "", new BaseCallback<String>() {
             @Override
             public void onRequestBefore(Request request) {
 
@@ -251,7 +251,7 @@ public class MineFragment extends BaseFragment {
     }
 
     /**
-     * ¸ù¾Ý ×´Ì¬»ñÈ¡¶©µ¥ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ ×´Ì¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * @param state ×´Ì¬
      */
     private void getOrdersByState(int state) {

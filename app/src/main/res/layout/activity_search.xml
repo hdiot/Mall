@@ -12,10 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
+        app:titleTextColor="@color/white"
         app:navigationIcon="@drawable/selector_back_icon"
-        app:title="搜索">
+        app:title="搜索"/>
 
-    </android.support.v7.widget.Toolbar>
-
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

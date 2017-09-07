@@ -6,12 +6,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.google.gson.Gson;
 import com.mebee.mall.R;
+import com.mebee.mall.bean.City;
+import com.yiguo.adressselectorlib.AddressSelector;
+import com.yiguo.adressselectorlib.CityInterface;
+import com.yiguo.adressselectorlib.OnItemClickListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,9 +40,16 @@ public class InsertAddressActivity extends AppCompatActivity {
     TextView tvAreaAddrInsert;
     @BindView(R.id.et_detail_addr_insert)
     EditText etDetailAddrInsert;
+    @BindView(R.id.address_selector)
+    AddressSelector addressSelector;
 
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
+
+
+    private ArrayList<City> cities1 = new ArrayList<>();
+    private ArrayList<City> cities2 = new ArrayList<>();
+    private ArrayList<City> cities3 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +58,103 @@ public class InsertAddressActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initLocation();
         startLocation();
+        initData();
         setListen();
     }
 
-    private void setListen(){
+    private void initData(){
+        try {
+            JSONArray jsonArray= new JSONArray(getString(R.string.cities1));
+            for(int i =0;i<jsonArray.length();i++){
+                cities1.add(new Gson().fromJson(jsonArray.get(i).toString(),City.class));
+            }
+            JSONArray jsonArray2= new JSONArray(getString(R.string.cities2));
+            for(int i =0;i<jsonArray2.length();i++){
+                cities2.add(new Gson().fromJson(jsonArray2.get(i).toString(),City.class));
+            }
+            JSONArray jsonArray3= new JSONArray(getString(R.string.cities3));
+            for(int i =0;i<jsonArray3.length();i++){
+                cities3.add(new Gson().fromJson(jsonArray3.get(i).toString(),City.class));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initAddressSelector(){
+        addressSelector.setCities(cities1);
+    }
+
+    private void displaySelector(){
+        initAddressSelector();
+        addressSelector.setVisibility(View.VISIBLE);
+        addressSelector.setEnabled(true);
+    }
+
+    private void hideSeletor(){
+        addressSelector.setVisibility(View.INVISIBLE);
+        addressSelector.setEnabled(false);
+    }
+
+    private void setListen() {
+
+        addressSelector.setOnItemClickListener(new OnItemClickListener() {
+            final String[] a1 = {""};
+            final String[] a2 = {""};
+            final String[] a3 = {""};
+            @Override
+            public void itemClick(AddressSelector addressSelector, CityInterface cityInterface, int i) {
+                switch (i){
+
+                    case 0:
+                        addressSelector.setCities(cities2);
+                        a1[0] = cityInterface.getCityName();
+                        break;
+                    case 1:
+                        addressSelector.setCities(cities3);
+                        a2[0] = cityInterface.getCityName();
+                        break;
+                    case 2:
+                        Toast.makeText(InsertAddressActivity.this, "tabPosition ：" + i + " " + cityInterface.getCityName(), Toast.LENGTH_SHORT).show();
+                        a3[0] = cityInterface.getCityName();
+                        tvAreaAddrInsert.setText(a1[0]+a2[0]+a3[0]);
+                        hideSeletor();
+                        break;
+                }
+            }
+        });
+        addressSelector.setOnTabSelectedListener(new AddressSelector.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(AddressSelector addressSelector, AddressSelector.Tab tab) {
+                switch (tab.getIndex()){
+                    case 0:
+                        addressSelector.setCities(cities1);
+                        break;
+                    case 1:
+                        addressSelector.setCities(cities2);
+                        break;
+                    case 2:
+                        addressSelector.setCities(cities3);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabReselected(AddressSelector addressSelector, AddressSelector.Tab tab) {
+
+            }
+        });
         toolbarAddrInsert.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        tvAreaAddrInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displaySelector();
             }
         });
     }
@@ -102,7 +209,9 @@ public class InsertAddressActivity extends AppCompatActivity {
                 StringBuffer sb = new StringBuffer();
                 //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
                 if (location.getErrorCode() == 0) {
-                    tvAreaAddrInsert.setText(location.getProvince()+" "+location.getCity()+" "+location.getDistrict());
+                    tvAreaAddrInsert.setText(location.getProvince() + " " + location.getCity() + " " + location.getDistrict());
+                    etDetailAddrInsert.setText(location.getPoiName());
+                    stopLocation();
                 } else {
                     //定位失败
                     sb.append("定位失败" + "\n");

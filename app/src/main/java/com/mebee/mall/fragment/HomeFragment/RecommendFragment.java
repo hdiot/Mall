@@ -164,6 +164,7 @@ public class RecommendFragment extends BaseFragment {
             @Override
             public void onRequestBefore(Request request) {
                 mProgressBar.setVisibility(View.VISIBLE);
+                mTxtWarm.setVisibility(View.GONE);
             }
 
             @Override

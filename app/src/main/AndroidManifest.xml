@@ -64,7 +64,11 @@
         <activity android:name=".activity.ResetPwdActivity" />
         <activity android:name=".activity.AddressManagerActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.SearchActivity" >
+            <action android:name="android.intent.action.SEARCH"/>
+            <meta-data  android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity android:name=".activity.InsertAddressActivity"></activity>
     </application>
 

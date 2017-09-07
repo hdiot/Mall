@@ -94,4 +94,19 @@
             android:background="@color/white"/>
     </LinearLayout>
 
+    <com.yiguo.adressselectorlib.AddressSelector
+        android:id="@+id/address_selector"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:enabled="false"
+        android:visibility="invisible"/>
+
+
+    <Button
+        android:id="@+id/bt_insert_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_button_square"
+        android:text="确认添加"/>
 </LinearLayout>

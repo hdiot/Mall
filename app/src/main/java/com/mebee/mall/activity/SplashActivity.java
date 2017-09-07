@@ -150,7 +150,6 @@ public class SplashActivity extends Activity {
                 Log.d(TAG, "OnSuccess: " + s);
                 if (s.contains(NOTEXISTERROR) && s.contains(PASSWORDERROR)) {
                     Toast.makeText(SplashActivity.this, R.string.login_overdue, Toast.LENGTH_SHORT).show();
-                    call2Login();
                 } else{
                     Type type = new TypeToken<ResMessage<User>>(){}.getType();
                     ResMessage<User> msg = JSONUtil.fromJson(s,type);

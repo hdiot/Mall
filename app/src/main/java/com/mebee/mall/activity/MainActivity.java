@@ -1,15 +1,19 @@
 package com.mebee.mall.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -23,12 +27,14 @@ import com.mebee.mall.fragment.MineFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, TabHost.OnTabChangeListener {
     private static final String TAG = "MainActivity";
 
     private FragmentTabHost mTabHost;
     private LayoutInflater mInflater;
+    private ViewPager mViewPager;
     private List<Tab> mTabs = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         FLog.setMinimumLoggingLevel(FLog.VERBOSE);*/
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
+        initView();
         initTab();
+        initPager();
+    }
 
+    private void initView(){
+        mInflater = LayoutInflater.from(this);
+        mTabHost = (FragmentTabHost) this.findViewById(R.id.main_tabhost);
+        mViewPager = (ViewPager) this.findViewById(R.id.main_viewpager);
     }
 
     /**
@@ -57,29 +70,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Tab category = new Tab(R.string.category,R.drawable.selector_icon_category,CategoryFragment.class);
         Tab mine = new Tab(R.string.mine,R.drawable.selector_icon_mine,MineFragment.class);
 
-
         mTabs.add(home);
         mTabs.add(category);
         mTabs.add(cart);
         mTabs.add(mine);
 
         // 实例化 FragmentTabHost
-        mInflater = LayoutInflater.from(this);
-        mTabHost = (FragmentTabHost) this.findViewById(R.id.main_tabhost);
         mTabHost.setup(this,getSupportFragmentManager(),R.id.main_tab_cotent);
 
         // 根据 Tab 信息 创建  Tab Fragment
-        for (Tab mTab : mTabs) {
-
-            Log.d("ID", "initTab: "+mTab.getTitle()+"--"+mTab.getIcon());
-
-            TabHost.TabSpec tabspec = mTabHost.newTabSpec(getString(mTab.getTitle()));
-
+        for (int i = 0; i < mTabs.size(); i++) {
+            Tab mTab = mTabs.get(i);
+            TabHost.TabSpec tabspec = mTabHost.newTabSpec(String.valueOf(i));
             tabspec.setIndicator( buildIndicator(mTab));
-
             mTabHost.addTab(tabspec,mTab.getFragment(),null);
         }
         mTabHost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+        mTabHost.setOnTabChangedListener(this);
     }
 
     /**
@@ -94,12 +101,63 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         imageView.setBackgroundResource(tab.getIcon());
         textView.setText(tab.getTitle());
         return view;
+    }
+
+
+    private void initPager(){
+        mFragmentList.add(new HomeFragment());
+        mFragmentList.add(new CategoryFragment());
+        mFragmentList.add(new CartFragment());
+        mFragmentList.add(new MineFragment());
+
+        mViewPager.setOnPageChangeListener(this);
+        mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),mFragmentList));
 
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        Log.d(TAG, "onTouch: " + event.getX() + "---" + event.getY());
-        return true;
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        TabWidget widget = mTabHost.getTabWidget();
+        int oldFocusability = widget.getDescendantFocusability();
+        widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        mTabHost.setCurrentTab(position);
+        widget.setDescendantFocusability(oldFocusability);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onTabChanged(String tabId) {
+        mTabHost.setCurrentTab(Integer.parseInt(tabId));
+        mViewPager.setCurrentItem(Integer.parseInt(tabId));
+    }
+
+
+    class PagerAdapter extends FragmentStatePagerAdapter{
+
+        private List<Fragment> fragments;
+
+        public PagerAdapter(FragmentManager fm, List<Fragment> fl) {
+            super(fm);
+            this.fragments = fl;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
     }
 }

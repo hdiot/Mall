@@ -157,7 +157,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
 
     private void getAddress(String addresid) {
-        mOkhttpHelper.doPost(Constant.API.GET_ADDRESS_BY_ID,
+        mOkhttpHelper.doPost(Constant.API.GET_ADDRESS_BY_ID_API,
                 formParams("addressId", addresid),
                 new BaseCallback<OrderAddress>() {
                     @Override
@@ -187,7 +187,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void getWares(String orderid) {
-        mOkhttpHelper.doPost(Constant.API.GET_ALL_WARES_BY_ORDER_ID,
+        mOkhttpHelper.doPost(Constant.API.GET_ALL_WARES_BY_ORDER_ID_API,
                 formParams("orderid", orderid),
                 new BaseCallback<String>() {
                     @Override
@@ -226,7 +226,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void getWare(String id) {
-        mOkhttpHelper.doPost(Constant.API.GET_WARE_BY_ID,
+        mOkhttpHelper.doPost(Constant.API.GET_WARE_BY_ID_API,
                 formParams("id", id),
                 new BaseCallback<Ware>() {
                     @Override
@@ -315,7 +315,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mOkhttpHelper.doPost(Constant.API.CHANGE_ORDER_STATE, json.toString(),
+        mOkhttpHelper.doPost(Constant.API.CHANGE_ORDER_STATE_API, json.toString(),
                 new BaseCallback<ResMessage<String>>() {
                     @Override
                     public void onRequestBefore(Request request) {
@@ -351,7 +351,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mOkhttpHelper.doPost(Constant.API.DELETE_ORDER_BY_ID, json.toString(),
+        mOkhttpHelper.doPost(Constant.API.DELETE_ORDER_BY_ID_API, json.toString(),
                 new BaseCallback<ResMessage<String>>() {
                     @Override
                     public void onRequestBefore(Request request) {
