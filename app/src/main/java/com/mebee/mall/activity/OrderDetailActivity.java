@@ -319,12 +319,10 @@ public class OrderDetailActivity extends AppCompatActivity {
                 new BaseCallback<ResMessage<String>>() {
                     @Override
                     public void onRequestBefore(Request request) {
-
                     }
 
                     @Override
                     public void onFailure(Request request, IOException e) {
-
                     }
 
                     @Override
