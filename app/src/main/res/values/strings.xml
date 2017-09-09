@@ -21,7 +21,6 @@
     <string name="tab_salesvolume">TAG_VOLUNE</string>
     <string name="price">价格</string>
     <string name="tag_price">TAG_PRICE</string>
-    <string name="netword_fail">网络出错</string>
     <string name="not_login">尚未登录</string>
     <string name="user_existed">该用户已存在</string>
     <string name="registe_success">注册成功</string>
@@ -529,4 +528,6 @@
     <string name="please_inout_ware_name">请输入商品名称</string>
     <string name="name">name</string>
     <string name="NULL">NULL</string>
+    <string name="netword_fail">网络出错</string>
+    <string name="error_code">" 错误代码："</string>
 </resources>

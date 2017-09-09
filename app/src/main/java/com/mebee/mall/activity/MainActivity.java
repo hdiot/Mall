@@ -52,12 +52,20 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         initView();
         initTab();
         initPager();
+        ifWareDetailCall();
     }
 
     private void initView(){
         mInflater = LayoutInflater.from(this);
         mTabHost = (FragmentTabHost) this.findViewById(R.id.main_tabhost);
         mViewPager = (ViewPager) this.findViewById(R.id.main_viewpager);
+    }
+
+    private void ifWareDetailCall(){
+        if (getIntent().getIntExtra("waredetail",0) == 1) {
+            mTabHost.setCurrentTab(2);
+            mViewPager.setCurrentItem(2);
+        }
     }
 
     /**

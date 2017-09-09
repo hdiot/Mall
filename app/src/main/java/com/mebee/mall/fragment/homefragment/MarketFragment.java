@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -226,7 +227,7 @@ public class MarketFragment extends BaseFragment {
 
            @Override
            public void onFailure(Request request, IOException e) {
-
+               Toast.makeText(getActivity(), R.string.netword_fail, Toast.LENGTH_SHORT).show();
            }
 
            @Override
@@ -239,6 +240,9 @@ public class MarketFragment extends BaseFragment {
            @Override
            public void onError(Response response, int code, Exception e) {
 
+               Toast.makeText(getActivity(), getString(R.string.netword_fail)
+                       + getString(R.string.error_code)
+                       + code, Toast.LENGTH_SHORT).show();
            }
        });
    }

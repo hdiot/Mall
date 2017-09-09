@@ -100,7 +100,8 @@ public class OkhttpHelper {
                         }
                     }
                 } else {
-                    Log.d(TAG, "onResponse: " + response.body().string() + response.code());
+                    callbackError(callback, response, response.code(),null);
+                    Log.d(TAG, "onResponse: " + response.code() + response.body().string());
                 }
             }
         });

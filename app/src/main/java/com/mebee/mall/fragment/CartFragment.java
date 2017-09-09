@@ -314,7 +314,9 @@ public class CartFragment extends BaseFragment implements CartAdapter.OnDataUpda
 
                 @Override
                 public void onError(Response response, int code, Exception e) {
-                    Toast.makeText(getActivity(), R.string.netword_fail + code, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.netword_fail)
+                            + getString(R.string.error_code)
+                            + code, Toast.LENGTH_SHORT).show();
                 }
             });
 
