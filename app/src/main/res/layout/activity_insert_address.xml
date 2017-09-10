@@ -94,19 +94,23 @@
             android:background="@color/white"/>
     </LinearLayout>
 
-    <com.yiguo.adressselectorlib.AddressSelector
-        android:id="@+id/address_selector"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:enabled="false"
-        android:visibility="invisible"/>
+        android:layout_weight="1">
 
+        <Button
+            android:id="@+id/bt_insert_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_button_square"
+            android:layout_alignParentBottom="true"
+            android:text="确认添加"/>
 
-    <Button
-        android:id="@+id/bt_insert_address"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/selector_button_square"
-        android:text="确认添加"/>
+        <com.mebee.mall.widget.AddressPicker
+            android:id="@+id/picker_insert_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </RelativeLayout>
 </LinearLayout>

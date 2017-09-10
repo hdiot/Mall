@@ -56,6 +56,7 @@ public class AddressManagerActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AddressManagerActivity.this,InsertAddressActivity.class));
+                finish();
             }
         });
     }

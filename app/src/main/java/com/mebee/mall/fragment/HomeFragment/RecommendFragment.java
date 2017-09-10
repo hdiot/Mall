@@ -107,15 +107,12 @@ public class RecommendFragment extends BaseFragment {
     @Override
     public void initSliderView() {
         super.initSliderView();
-
         initSliderData();
-
     }
 
     @Override
     public void initRecyclerView() {
         super.initRecyclerView();
-
         if (mWares ==null) {
             initRecyclerData();
         }
@@ -169,7 +166,7 @@ public class RecommendFragment extends BaseFragment {
 
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(getActivity(), getString(R.string.netword_fail), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), getString(R.string.netword_fail), Toast.LENGTH_SHORT).show();
                 mProgressBar.setVisibility(View.GONE);
                 mTxtWarm.setVisibility(View.VISIBLE);
             }

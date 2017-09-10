@@ -17,7 +17,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private LayoutInflater mInflater;
     private CategoryItemOnClickListener mItemListener;
 
-    //public static final String[] categorys = {"柑橘类", "浆果类", "仁果类", "坚果类", "核果类", "瓜类", "其他"};
     public static final String[] categorys = {"柑橘类", "浆果类", "仁果类", "坚果类", "核果类", "瓜类", "其他"};
 
     @Override
@@ -40,8 +39,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.TV_Category.setText(categorys[position]);
-        holder.mView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        holder.tvCategory.setText(categorys[position]);
+        holder.view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -50,7 +49,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             }
         });
         if (position == 0){
-            holder.mView.requestFocus();
+            holder.view.requestFocus();
         }
     }
 
@@ -62,13 +61,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView TV_Category;
-        public View mView;
+        public TextView tvCategory;
+        public View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mView = itemView;
-            TV_Category = (TextView) itemView.findViewById(R.id.txt_category);
+            view = itemView;
+            tvCategory = (TextView) itemView.findViewById(R.id.txt_category);
         }
     }
 }

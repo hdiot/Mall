@@ -88,7 +88,7 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
             }
         });
 
-        holder.ItemView.setOnClickListener(new View.OnClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, WareDetailActivity.class);
@@ -114,7 +114,7 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
         TextView goodPrice;
         TextView goodProductPlace;
         Button addIntoCart;
-        View ItemView;
+        View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -123,7 +123,7 @@ public class WaresAdapter extends RecyclerView.Adapter<WaresAdapter.ViewHolder> 
             goodPrice = (TextView) itemView.findViewById(R.id.txt_good_price);
             goodProductPlace = (TextView) itemView.findViewById(R.id.txt_good_product_place);
             addIntoCart = (Button) itemView.findViewById(R.id.btn_add_into_cart);
-            ItemView = itemView;
+            view = itemView;
         }
     }
 

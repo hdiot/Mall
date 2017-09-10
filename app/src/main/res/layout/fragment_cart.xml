@@ -96,13 +96,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/border_color"
         android:layout_below="@+id/toolbar_order"/>
 
     <View
         android:layout_above="@+id/layout_order"
         android:layout_width="match_parent"
-        android:background="@color/black"
+        android:background="@color/gray"
         android:layout_height="0.5dp"/>
 
     <LinearLayout

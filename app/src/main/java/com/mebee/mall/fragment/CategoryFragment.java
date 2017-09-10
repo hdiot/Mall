@@ -170,7 +170,7 @@ public class CategoryFragment extends BaseFragment {
 
             @Override
             public void onFailure(Request request, IOException e) {
-                Toast.makeText(getActivity(), R.string.netword_fail, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.netword_fail, Toast.LENGTH_SHORT).show();
             }
 
             @Override

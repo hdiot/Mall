@@ -69,7 +69,8 @@
             <meta-data  android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".activity.InsertAddressActivity"></activity>
+        <activity android:name=".activity.InsertAddressActivity">
+        </activity>
     </application>
 
 </manifest>
